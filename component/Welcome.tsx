@@ -11,7 +11,7 @@ import image1 from "../assets/images/welcome_image_1.png";
 import image2 from "../assets/images/welcome_image_2.png";
 import image3 from "../assets/images/welcome_image_3.png";
 import { useRouter } from "expo-router";
-
+import AntDesign from "@expo/vector-icons/AntDesign";
 const Welcome = () => {
   const router = useRouter();
 
@@ -146,9 +146,9 @@ const Welcome = () => {
         </View>
       </View>
       {/**Button */}
-      <View className="mx-auto mt-10">
-        <TouchableOpacity className="bg-[#6759FF] px-7 py-5 h-16 w-16 rounded-full">
-          <Text className="text-white">{">"}</Text>
+      <View className="mx-auto mt-10 ">
+        <TouchableOpacity className="rounded-full bg-[#6759FF] p-4 ">
+          <AntDesign name="right" size={24} color="white" />
         </TouchableOpacity>
       </View>
     </SafeAreaView>
