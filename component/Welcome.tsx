@@ -192,17 +192,29 @@ const Welcome = () => {
                 </View>
               </View>
               {/**Button */}
-              <View className="mx-auto mt-10 ">
-                <TouchableOpacity
-                  onPress={() => handleNextPage()}
-                  className="rounded-full bg-[#6759FF] p-4 "
-                >
-                  <Text>
-                    {" "}
-                    <AntDesign name="right" size={24} color="white" />
-                  </Text>
-                </TouchableOpacity>
-              </View>
+
+              {showData === 3 ? (
+                <View className="mx-auto mt-10">
+                  <TouchableOpacity
+                    onPress={() => router.push("/signin/sign-in")}
+                    className="p-4 px-12 rounded-xl bg-[#6759ff]"
+                  >
+                    <Text className="text-white">Get Started</Text>
+                  </TouchableOpacity>
+                </View>
+              ) : (
+                <View className="mx-auto mt-10 ">
+                  <TouchableOpacity
+                    onPress={() => handleNextPage()}
+                    className="rounded-full bg-[#6759FF] p-4 "
+                  >
+                    <Text>
+                      {" "}
+                      <AntDesign name="right" size={24} color="white" />
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              )}
             </View>
           );
         }}
