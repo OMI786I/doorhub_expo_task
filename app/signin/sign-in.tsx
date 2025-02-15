@@ -77,7 +77,10 @@ const Signin = () => {
             </View>
           </View>
           <View>
-            <TouchableOpacity className="p-5 bg-[#efefef] mt-6 rounded-2xl">
+            <TouchableOpacity
+              onPress={() => router.push("/verification/verification")}
+              className="p-5 bg-[#efefef] mt-6 rounded-2xl"
+            >
               <Text className="text-center text-xl font-bold">Sign In</Text>
             </TouchableOpacity>
           </View>
@@ -104,7 +107,10 @@ const Signin = () => {
 
         {/**bottom parts */}
         <View className="mt-7 justify-center items-center">
-          <TouchableOpacity className="p-5 justify-center items-center bg-[#fcfcfc] border rounded-2xl border-gray-200 w-3/4">
+          <TouchableOpacity
+            onPress={() => router.push("/verification/verification")}
+            className="p-5 justify-center items-center bg-[#fcfcfc] border rounded-2xl border-gray-200 w-3/4"
+          >
             <Text className="text-center text-lg font-bold">
               Continue as a Guest
             </Text>
