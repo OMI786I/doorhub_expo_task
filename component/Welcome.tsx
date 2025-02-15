@@ -11,15 +11,6 @@ import image1 from "../assets/images/welcome_image_1.png";
 import image2 from "../assets/images/welcome_image_2.png";
 import image3 from "../assets/images/welcome_image_3.png";
 import { useRouter } from "expo-router";
-import {
-  Svg,
-  Defs,
-  RadialGradient,
-  Stop,
-  Mask,
-  Rect,
-  Circle,
-} from "react-native-svg";
 
 const Welcome = () => {
   const router = useRouter();
@@ -83,6 +74,7 @@ const Welcome = () => {
         {/**Stipe design */}
         <View className="-rotate-[10deg] absolute bottom-16">
           <FlatList
+            showsHorizontalScrollIndicator={false}
             scrollEnabled={false}
             horizontal
             contentContainerClassName="-left-2 "
@@ -107,6 +99,7 @@ const Welcome = () => {
         {/**Stipe2 design */}
         <View className=" -z-10 rotate-[10deg] absolute bottom-16">
           <FlatList
+            showsHorizontalScrollIndicator={false}
             scrollEnabled={false}
             horizontal
             contentContainerClassName="-left-1"
@@ -128,6 +121,35 @@ const Welcome = () => {
             }}
           />
         </View>
+      </View>
+      {/**lower part */}
+      <View className="mx-auto mt-9">
+        {/**progress circle */}
+        <View className="flex-row justify-center gap-4">
+          {" "}
+          <View className="w-3 h-3 rounded-full bg-[#6759FF] "></View>
+          <View className="w-3 h-3 rounded-full bg-[#6759FF] opacity-20 "></View>
+          <View className="w-3 h-3 rounded-full bg-[#6759FF] opacity-20 "></View>
+        </View>
+        {/**title & description */}
+        <View className="mt-8 px-10">
+          {" "}
+          <Text className="font-bold text-center text-3xl">
+            Beauty Parlor At your home
+          </Text>
+        </View>
+        <View>
+          <Text className="text-[#535763] text-center px-3 mt-2">
+            Get professional beauty parlour services at your home for a relaxing
+            and luxurious experience.
+          </Text>
+        </View>
+      </View>
+      {/**Button */}
+      <View className="mx-auto mt-10">
+        <TouchableOpacity className="bg-[#6759FF] px-7 py-5 h-16 w-16 rounded-full">
+          <Text className="text-white">{">"}</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
