@@ -8,6 +8,7 @@ export default function RootLayout() {
       }}
     >
       <Stack.Screen name="signin" options={{}} />
+      <Stack.Screen name="signup" options={{}} />
     </Stack>
   );
 }

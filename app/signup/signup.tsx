@@ -9,25 +9,29 @@ import {
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import CountryPicker from "react-native-country-picker-modal";
-import logo from "@/assets/images/Logo.png";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import logo from "@/assets/images/logo_no_text.png";
+import { Picker } from "@react-native-picker/picker";
+
 import { useRouter } from "expo-router";
-const Signin = () => {
+const signup = () => {
   const [countryCode, setCountryCode] = useState("US");
   const [country, setCountry] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isCountryPickerVisible, setIsCountryPickerVisible] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const router = useRouter();
   const onSelectCountry = (country) => {
     setCountryCode(country.cca2);
     setCountry(country);
   };
+  const [title, setTitle] = useState("Mr.");
 
   useEffect(() => {
     const enteredPhone = country?.callingCode[0] + phoneNumber;
     console.log("entered phone", enteredPhone);
   }, [phoneNumber, country]);
-
+  console.log("name", title + firstName + lastName);
   return (
     <SafeAreaView className="bg-white">
       <ScrollView>
@@ -35,7 +39,48 @@ const Signin = () => {
           <Image source={logo} />
         </View>
         <View className="mt-20 px-4">
-          <Text className="text-4xl">Sign in</Text>
+          <Text className="text-4xl">Sign Up</Text>
+
+          {/**input first name */}
+          <View className="mt-7">
+            <Text className="text-xl">First Name</Text>
+            <View className="flex-row items-center mt-2 bg-[#F5F5F5] p-3 rounded-2xl">
+              <Text className="flex-[0.1]">{title}</Text>
+              <Picker
+                selectedValue={title}
+                onValueChange={(itemValue) => setTitle(itemValue)}
+                style={{
+                  backgroundColor: "#f5f5f5",
+                  flex: 0.1,
+                }}
+              >
+                <Picker.Item label="Mr." value="Mr." />
+
+                <Picker.Item label="Ms." value="Ms." />
+              </Picker>
+
+              <TextInput
+                placeholderTextColor={"#D1D3D4"}
+                className="flex-1 ml-2   px-3 py-2"
+                placeholder="First name"
+                onChangeText={setFirstName}
+              />
+            </View>
+          </View>
+
+          {/**input last name */}
+          <View className="mt-7">
+            <Text className="text-xl">Last Name</Text>
+            <View className="flex-row items-center mt-2 bg-[#F5F5F5] p-3 rounded-2xl">
+              <TextInput
+                className="flex-1 ml-2   px-3 py-2"
+                placeholderTextColor={"#D1D3D4"}
+                placeholder="Last name"
+                onChangeText={setLastName}
+              />
+            </View>
+          </View>
+
           {/**input phone number */}
           <View className="mt-7">
             <Text className="text-xl">Phone Number</Text>
@@ -67,7 +112,6 @@ const Signin = () => {
                 )}
               </TouchableOpacity>
               <TextInput
-                placeholderTextColor={"#D1D3D4"}
                 className="flex-1 ml-2  rounded-lg px-3 py-2"
                 placeholder="Enter your phone number"
                 keyboardType="phone-pad"
@@ -78,45 +122,21 @@ const Signin = () => {
           </View>
           <View>
             <TouchableOpacity className="p-5 bg-[#efefef] mt-6 rounded-2xl">
-              <Text className="text-center text-xl font-bold">Sign In</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        {/**socials */}
-        <View className="mt-14">
-          <Text className="text-center text-xl">Sign in with</Text>
-          <View className="flex-row justify-center items-center gap-5 mt-6">
-            {" "}
-            <TouchableOpacity className="border px-2 py-2 rounded-2xl border-gray-400 ">
-              <FontAwesome5 name="facebook" size={34} color="#1977f3" />
-            </TouchableOpacity>
-            <TouchableOpacity className="border p-2 rounded-2xl border-gray-400">
-              <Image
-                source={require("@/assets/images/google.png")}
-                className="w-8 p-5"
-              />
-            </TouchableOpacity>
-            <TouchableOpacity className="border px-4 py-2 rounded-2xl border-gray-400">
-              <FontAwesome5 name="apple" size={34} color="#black" />
+              <Text className="text-center text-xl font-bold">Sign Up</Text>
             </TouchableOpacity>
           </View>
         </View>
 
         {/**bottom parts */}
         <View className="mt-7 justify-center items-center">
-          <TouchableOpacity className="p-5 justify-center items-center bg-[#fcfcfc] border rounded-2xl border-gray-200 w-3/4">
-            <Text className="text-center text-lg font-bold">
-              Continue as a Guest
-            </Text>
-          </TouchableOpacity>
           <View className="flex-row gap-2 p-4">
             {" "}
             <Text className="text-[#9A9FA5]">Create a New Account?</Text>
             <Text
               className="text-blue-700 font-bold"
-              onPress={() => router.push("/signup/signup")}
+              onPress={() => router.push("/signin/sign-in")}
             >
-              Sign Up
+              Sign In
             </Text>
           </View>
         </View>
@@ -125,4 +145,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default signup;
