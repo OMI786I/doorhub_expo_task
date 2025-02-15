@@ -1,10 +1,19 @@
-import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 import React from "react";
 import image1 from "../assets/images/welcome_image_1.png";
 import image2 from "../assets/images/welcome_image_2.png";
 import image3 from "../assets/images/welcome_image_3.png";
+import { useRouter } from "expo-router";
 
 const Welcome = () => {
+  const router = useRouter();
+
   const data = [
     {
       id: 1,
@@ -34,13 +43,31 @@ const Welcome = () => {
 
   return (
     <SafeAreaView>
-      <View>
-        <TouchableOpacity className="bg-[#B5EBCD] p-3 rounded-lg w-[10%]">
-          <Text>Skip</Text>
-        </TouchableOpacity>
+      {/**top part */}
+      <View className="relative">
+        {" "}
+        <View className="items-end p-6">
+          <TouchableOpacity
+            onPress={() => {
+              router.push("/signin/sign-in");
+            }}
+            className="bg-[#B5EBCD]  p-2 rounded-3xl w-[15%]"
+          >
+            <Text className="text-center">Skip</Text>
+          </TouchableOpacity>
+        </View>
+        <View className="bg-[#FFCACA] w-[80] h-[80] rounded-full absolute -left-10 -top-7"></View>
+      </View>
 
-        <View className="bg-[#FFCACA] w-[80] h-[80]">
-          <Text className="text-red-50">asd</Text>
+      {/**middle part */}
+      <View>
+        <View className="w-[193.54px] h-[382.85px] mx-auto  justify-center rounded-3xl relative ">
+          <View className="bg-[#CABDFF] rounded-full pt-6  h-[80%] w-full mx-auto "></View>
+          <Image
+            source={require("../assets/images/welcome_image_1.png")}
+            className="w-full h-[95%] rounded-full absolute overflow-hidden"
+            resizeMode="contain"
+          />
         </View>
       </View>
     </SafeAreaView>
