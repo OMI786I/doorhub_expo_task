@@ -4,7 +4,10 @@
     "slug": "doorhub",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": {
+      "dark": "./assets/images/icon.png",
+      "light": "./assets/images/adaptive-icon.png"
+    },
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -28,12 +31,13 @@
         {
           "backgroundColor": "#6759FF",
           "image": "./assets/images/splash-icon.png",
-          "resizeMode": "contain",
+          "resizeMode": "cover",
           "imageWidth": 100,
+          "enableFullScreenImage_legacy": true,
           "dark": {
             "image": "./assets/images/splash-icon.png",
             "backgroundColor": "#0F1621",
-            "resizeMode": "contain"
+            "resizeMode": "cover"
           }
         }
       ]

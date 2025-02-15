@@ -6,8 +6,10 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React from "react";
+import { useRouter } from "expo-router";
 
 const verification = () => {
+  const router = useRouter();
   return (
     <SafeAreaView className="bg-white min-h-screen">
       <View className="p-6 justify-center mt-40">
@@ -35,7 +37,10 @@ const verification = () => {
           />
         </View>
         {/**button */}
-        <TouchableOpacity className="mt-16 p-5 justify-center items-center bg-[#efefef] rounded-2xl">
+        <TouchableOpacity
+          className="mt-16 p-5 justify-center items-center bg-[#efefef] rounded-2xl"
+          onPress={() => router.push("/home/home")}
+        >
           <Text className="text-lg font-bold">Continue</Text>
         </TouchableOpacity>
 

@@ -16,6 +16,7 @@ const Signin = () => {
   const [countryCode, setCountryCode] = useState("US");
   const [country, setCountry] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [isLogged, setIsLogged] = useState(false);
   const [isCountryPickerVisible, setIsCountryPickerVisible] = useState(false);
   const router = useRouter();
   const onSelectCountry = (country) => {
