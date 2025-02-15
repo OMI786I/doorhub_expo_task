@@ -28,7 +28,7 @@ const Signin = () => {
   }, [phoneNumber, country]);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView className="bg-white">
       <ScrollView>
         <View className="items-center justify-center mt-24">
           <Image source={logo} />
@@ -38,12 +38,12 @@ const Signin = () => {
           {/**input phone number */}
           <View className="mt-7">
             <Text className="text-xl">Phone Number</Text>
-            <View className="flex-row items-center mt-2 bg-[##F5F5F5]">
+            <View className="flex-row items-center mt-2 bg-[#F5F5F5] p-3 rounded-2xl">
               <TouchableOpacity
                 onPress={() => setIsCountryPickerVisible(true)}
                 className="flex-row items-center "
               >
-                <View className="w-10 h-10 rounded-full overflow-hidden border border-gray-300 justify-center items-center">
+                <View className="w-10 h-10 rounded-full overflow-hidden  justify-center items-center">
                   <CountryPicker
                     withFilter
                     withFlag
@@ -73,6 +73,11 @@ const Signin = () => {
                 onChangeText={setPhoneNumber}
               />
             </View>
+          </View>
+          <View>
+            <TouchableOpacity className="p-5 bg-[#efefef] mt-6 rounded-2xl">
+              <Text className="text-center text-xl font-bold">Sign In</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
