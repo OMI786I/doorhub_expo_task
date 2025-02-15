@@ -10,7 +10,7 @@ import {
 import React, { useState, useEffect } from "react";
 import CountryPicker from "react-native-country-picker-modal";
 import logo from "@/assets/images/Logo.png";
-
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 const Signin = () => {
   const [countryCode, setCountryCode] = useState("US");
   const [country, setCountry] = useState(null);
@@ -78,6 +78,39 @@ const Signin = () => {
             <TouchableOpacity className="p-5 bg-[#efefef] mt-6 rounded-2xl">
               <Text className="text-center text-xl font-bold">Sign In</Text>
             </TouchableOpacity>
+          </View>
+        </View>
+        {/**socials */}
+        <View className="mt-14">
+          <Text className="text-center text-xl">Sign in with</Text>
+          <View className="flex-row justify-center items-center gap-5 mt-6">
+            {" "}
+            <TouchableOpacity className="border px-2 py-2 rounded-2xl border-gray-400 ">
+              <FontAwesome5 name="facebook" size={34} color="#1977f3" />
+            </TouchableOpacity>
+            <TouchableOpacity className="border p-2 rounded-2xl border-gray-400">
+              <Image
+                source={require("@/assets/images/google.png")}
+                className="w-8 p-5"
+              />
+            </TouchableOpacity>
+            <TouchableOpacity className="border px-4 py-2 rounded-2xl border-gray-400">
+              <FontAwesome5 name="apple" size={34} color="#black" />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/**bottom parts */}
+        <View className="mt-7 justify-center items-center">
+          <TouchableOpacity className="p-5 justify-center items-center bg-[#fcfcfc] border rounded-2xl border-gray-200 w-3/4">
+            <Text className="text-center text-lg font-bold">
+              Continue as a Guest
+            </Text>
+          </TouchableOpacity>
+          <View className="flex-row gap-2 p-4">
+            {" "}
+            <Text className="text-[#9A9FA5]">Create a New Account?</Text>
+            <Text className="text-blue-700 font-bold">Sign Up</Text>
           </View>
         </View>
       </ScrollView>
