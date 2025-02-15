@@ -167,10 +167,16 @@ const Welcome = () => {
               <View className="mx-auto mt-9">
                 {/**progress circle */}
                 <View className="flex-row justify-center gap-4">
-                  {" "}
-                  <View className="w-3 h-3 rounded-full bg-[#6759FF] "></View>
-                  <View className="w-3 h-3 rounded-full bg-[#6759FF] opacity-20 "></View>
-                  <View className="w-3 h-3 rounded-full bg-[#6759FF] opacity-20 "></View>
+                  {data.map((item) => (
+                    <View
+                      key={item.id}
+                      className={`w-3 h-3 rounded-full ${
+                        item.id === showData
+                          ? "bg-[#6759FF]"
+                          : "bg-[#6759FF] opacity-20"
+                      }`}
+                    />
+                  ))}
                 </View>
                 {/**title & description */}
                 <View className="mt-8 px-10">
