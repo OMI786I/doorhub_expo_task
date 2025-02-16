@@ -18,8 +18,10 @@ export default function HomeScreen() {
   }, [isDark]);
 
   return (
-    <View className={`bg-[${defaultColor}] flex-1`}>
-      <Text className={`text-[${defaultTextColor}]`}>Home Screen</Text>
+    <View className={isDark ? "bg-[#0f1621] flex-1" : "bg-[#f9f9f9] flex-1"}>
+      <Text className={isDark ? "text-[#ffffff]" : `text-[#000000]`}>
+        Home Screen
+      </Text>
     </View>
   );
 }

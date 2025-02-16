@@ -7,7 +7,7 @@ import {
   FlatList,
   ScrollView,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import image1 from "@/assets/images/welcome_image_1.png";
 import image2 from "@/assets/images/welcome_image_2.png";
 import image3 from "@/assets/images/welcome_image_3.png";
@@ -17,22 +17,21 @@ import stringImg3 from "@/assets/images/Subtract4.png";
 
 import { useRouter } from "expo-router";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import { ThemeContext } from "../Context/ThemeContext";
+
 const Welcome = () => {
   const router = useRouter();
   const [showData, setShowData] = useState(1);
   const [renderData, setRenderData] = useState([]);
-  console.log(showData);
 
   interface Data {
     id: number;
-    image: string;
+    image: any;
     title: string;
     description: string;
-
     slogan: string[];
-    stripeImage: string;
+    stripeImage: any;
   }
-  [];
 
   const data: Data[] = [
     {
@@ -41,7 +40,6 @@ const Welcome = () => {
       title: "Beauty parlour at your home",
       description:
         "Get professional beauty parlour services at your home for a relaxing and luxurious experience.",
-
       slogan: ["Hair Style", "Makeup", "Beauty", "HairStyle", "Facial"],
       stripeImage: stringImg1,
     },
@@ -51,7 +49,6 @@ const Welcome = () => {
       title: " Plumber & expart nearby you",
       description:
         "Find expert plumbers near you for quick and reliable services.",
-
       slogan: ["Help", "Plumbing", "Repair", "Service", "install"],
       stripeImage: stringImg2,
     },
@@ -61,7 +58,6 @@ const Welcome = () => {
       title: " Professional home cleaning",
       description:
         "Expert home cleaning services for a spotless and refreshed living space.",
-
       slogan: ["Mop", "Home", "Cleaning", "Kitchen", "Carpet"],
       stripeImage: stringImg3,
     },
@@ -70,7 +66,6 @@ const Welcome = () => {
   useEffect(() => {
     const toShowData = data.filter((item) => item.id === showData);
     setRenderData(toShowData);
-    console.log(toShowData);
   }, [showData]);
 
   const handleNextPage = () => {
@@ -80,18 +75,29 @@ const Welcome = () => {
     }
   };
 
+  const { isDark } = useContext(ThemeContext);
+  const [defaultColor, setDefaultColor] = useState("#f9f9f9");
+  const [defaultTextColor, setDefaultTextColor] = useState("#000000");
+
+  useEffect(() => {
+    if (isDark) {
+      setDefaultColor("#0f1621"); // Dark theme background color
+      setDefaultTextColor("#ffffff"); // Dark theme text color
+    } else {
+      setDefaultColor("#f9f9f9"); // Light theme background color
+      setDefaultTextColor("#000000"); // Light theme text color
+    }
+  }, [isDark]);
+
   return (
-    <SafeAreaView>
-      <ScrollView className="bg-white min-h-screen">
+    <SafeAreaView style={{ backgroundColor: defaultColor, flex: 1 }}>
+      <ScrollView>
         {/**top part */}
         <View className="relative">
-          {" "}
           <View className="items-end p-6">
             <TouchableOpacity
-              onPress={() => {
-                router.push("/signin/sign-in");
-              }}
-              className="bg-[#B5EBCD]  p-2 rounded-3xl w-[15%]"
+              onPress={() => router.push("/signin/sign-in")}
+              className="bg-[#B5EBCD] p-2 rounded-3xl w-[15%]"
             >
               <Text className="text-center">Skip</Text>
             </TouchableOpacity>
@@ -106,21 +112,21 @@ const Welcome = () => {
               <View>
                 {/**middle part */}
                 <View className="relative">
-                  <View className="w-[193.54px] h-[382.85px] mx-auto  justify-center rounded-3xl relative ">
-                    <View className="bg-[#CABDFF] rounded-full pt-6  h-[80%] w-full mx-auto "></View>
+                  <View className="w-[193.54px] h-[382.85px] mx-auto justify-center rounded-3xl relative">
+                    <View className="bg-[#CABDFF] rounded-full pt-6 h-[80%] w-full mx-auto"></View>
                     <Image
-                      source={item?.image}
+                      source={item.image}
                       className="w-full h-[95%] rounded-full absolute overflow-hidden"
                       resizeMode="cover"
                     />
                   </View>
-                  {/**Stipe design */}
+                  {/**Stripe design */}
                   <View className="-rotate-[10deg] absolute bottom-16">
                     <FlatList
                       showsHorizontalScrollIndicator={false}
                       scrollEnabled={false}
                       horizontal
-                      contentContainerClassName="-left-2 "
+                      contentContainerClassName="-left-2"
                       data={item.slogan}
                       renderItem={({ item: sloganItem }) => {
                         return (
@@ -139,14 +145,14 @@ const Welcome = () => {
                       }}
                     />
                   </View>
-                  {/**Stipe2 design */}
-                  <View className=" -z-10 rotate-[10deg] absolute bottom-16">
+                  {/**Stripe2 design */}
+                  <View className="-z-10 rotate-[10deg] absolute bottom-16">
                     <FlatList
                       showsHorizontalScrollIndicator={false}
                       scrollEnabled={false}
                       horizontal
                       contentContainerClassName="-left-1"
-                      data={item?.slogan}
+                      data={item.slogan}
                       renderItem={({ item }) => {
                         return (
                           <View>
@@ -155,7 +161,7 @@ const Welcome = () => {
                                 className="-ml-[5px]"
                                 source={require("@/assets/images/Subtract2.png")}
                               />
-                              <Text className=" text-[#678593] text-center absolute top-5 left-[17px]">
+                              <Text className="text-[#678593] text-center absolute top-5 left-[17px]">
                                 {item}
                               </Text>
                             </View>
@@ -182,19 +188,23 @@ const Welcome = () => {
                   </View>
                   {/**title & description */}
                   <View className="mt-8 px-10">
-                    {" "}
-                    <Text className="font-bold text-center text-3xl">
-                      {item?.title}
+                    <Text
+                      style={{ color: defaultTextColor }}
+                      className="font-bold text-center text-3xl"
+                    >
+                      {item.title}
                     </Text>
                   </View>
                   <View>
-                    <Text className="text-[#535763] text-center px-3 mt-2">
-                      {item?.description}
+                    <Text
+                      style={{ color: defaultTextColor }}
+                      className="text-center px-3 mt-2"
+                    >
+                      {item.description}
                     </Text>
                   </View>
                 </View>
                 {/**Button */}
-
                 {showData === 3 ? (
                   <View className="mx-auto mt-10">
                     <TouchableOpacity
@@ -205,13 +215,12 @@ const Welcome = () => {
                     </TouchableOpacity>
                   </View>
                 ) : (
-                  <View className="mx-auto mt-10 ">
+                  <View className="mx-auto mt-10">
                     <TouchableOpacity
                       onPress={() => handleNextPage()}
-                      className="rounded-full bg-[#6759FF] p-4 "
+                      className="rounded-full bg-[#6759FF] p-4"
                     >
                       <Text>
-                        {" "}
                         <AntDesign name="right" size={24} color="white" />
                       </Text>
                     </TouchableOpacity>

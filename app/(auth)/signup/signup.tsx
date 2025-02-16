@@ -7,13 +7,14 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import CountryPicker from "react-native-country-picker-modal";
 import logo from "@/assets/images/logo_no_text.png";
 import { Picker } from "@react-native-picker/picker";
-
 import { useRouter } from "expo-router";
-const signup = () => {
+import { ThemeContext } from "@/app/Context/ThemeContext";
+
+const Signup = () => {
   const [countryCode, setCountryCode] = useState("US");
   const [country, setCountry] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -21,47 +22,95 @@ const signup = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const router = useRouter();
+  const [title, setTitle] = useState("Mr.");
+
+  const { isDark } = useContext(ThemeContext);
+  const [defaultColor, setDefaultColor] = useState("#f9f9f9");
+  const [defaultTextColor, setDefaultTextColor] = useState("#000000");
+  const [inputBackgroundColor, setInputBackgroundColor] = useState("#F5F5F5");
+  const [buttonBackgroundColor, setButtonBackgroundColor] = useState("#efefef");
+
+  useEffect(() => {
+    if (isDark) {
+      setDefaultColor("#0f1621"); // Dark theme background color
+      setDefaultTextColor("#ffffff"); // Dark theme text color
+      setInputBackgroundColor("#1E293B"); // Dark theme input background
+      setButtonBackgroundColor("#334155"); // Dark theme button background
+    } else {
+      setDefaultColor("#f9f9f9"); // Light theme background color
+      setDefaultTextColor("#000000"); // Light theme text color
+      setInputBackgroundColor("#F5F5F5"); // Light theme input background
+      setButtonBackgroundColor("#efefef"); // Light theme button background
+    }
+  }, [isDark]);
+
   const onSelectCountry = (country) => {
     setCountryCode(country.cca2);
     setCountry(country);
   };
-  const [title, setTitle] = useState("Mr.");
 
   useEffect(() => {
     const enteredPhone = country?.callingCode[0] + phoneNumber;
     console.log("entered phone", enteredPhone);
   }, [phoneNumber, country]);
+
   console.log("name", title + firstName + lastName);
+
   return (
-    <SafeAreaView className="bg-white">
+    <SafeAreaView style={{ backgroundColor: defaultColor, flex: 1 }}>
       <ScrollView>
-        <View className="items-center justify-center mt-24">
+        <View
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: 96,
+          }}
+        >
           <Image source={logo} />
         </View>
-        <View className="mt-20 px-4">
-          <Text className="text-4xl">Sign Up</Text>
+        <View style={{ marginTop: 80, paddingHorizontal: 16 }}>
+          <Text style={{ fontSize: 32, color: defaultTextColor }}>Sign Up</Text>
 
           {/**input first name */}
-          <View className="mt-7">
-            <Text className="text-xl">First Name</Text>
-            <View className="flex-row items-center mt-2 bg-[#F5F5F5] p-3 rounded-2xl">
-              <Text className="flex-[0.1]">{title}</Text>
+          <View style={{ marginTop: 28 }}>
+            <Text style={{ fontSize: 20, color: defaultTextColor }}>
+              First Name
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginTop: 8,
+                backgroundColor: inputBackgroundColor,
+                padding: 12,
+                borderRadius: 16,
+              }}
+            >
+              <Text style={{ flex: 0.1, color: defaultTextColor }}>
+                {title}
+              </Text>
               <Picker
                 selectedValue={title}
                 onValueChange={(itemValue) => setTitle(itemValue)}
                 style={{
-                  backgroundColor: "#f5f5f5",
+                  backgroundColor: inputBackgroundColor,
                   flex: 0.1,
+                  color: defaultTextColor,
                 }}
               >
                 <Picker.Item label="Mr." value="Mr." />
-
                 <Picker.Item label="Ms." value="Ms." />
               </Picker>
 
               <TextInput
                 placeholderTextColor={"#D1D3D4"}
-                className="flex-1 ml-2   px-3 py-2"
+                style={{
+                  flex: 1,
+                  marginLeft: 8,
+                  paddingHorizontal: 12,
+                  paddingVertical: 8,
+                  color: defaultTextColor,
+                }}
                 placeholder="First name"
                 onChangeText={setFirstName}
               />
@@ -69,12 +118,29 @@ const signup = () => {
           </View>
 
           {/**input last name */}
-          <View className="mt-7">
-            <Text className="text-xl">Last Name</Text>
-            <View className="flex-row items-center mt-2 bg-[#F5F5F5] p-3 rounded-2xl">
+          <View style={{ marginTop: 28 }}>
+            <Text style={{ fontSize: 20, color: defaultTextColor }}>
+              Last Name
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginTop: 8,
+                backgroundColor: inputBackgroundColor,
+                padding: 12,
+                borderRadius: 16,
+              }}
+            >
               <TextInput
-                className="flex-1 ml-2   px-3 py-2"
                 placeholderTextColor={"#D1D3D4"}
+                style={{
+                  flex: 1,
+                  marginLeft: 8,
+                  paddingHorizontal: 12,
+                  paddingVertical: 8,
+                  color: defaultTextColor,
+                }}
                 placeholder="Last name"
                 onChangeText={setLastName}
               />
@@ -82,14 +148,34 @@ const signup = () => {
           </View>
 
           {/**input phone number */}
-          <View className="mt-7">
-            <Text className="text-xl">Phone Number</Text>
-            <View className="flex-row items-center mt-2 bg-[#F5F5F5] p-3 rounded-2xl">
+          <View style={{ marginTop: 28 }}>
+            <Text style={{ fontSize: 20, color: defaultTextColor }}>
+              Phone Number
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginTop: 8,
+                backgroundColor: inputBackgroundColor,
+                padding: 12,
+                borderRadius: 16,
+              }}
+            >
               <TouchableOpacity
                 onPress={() => setIsCountryPickerVisible(true)}
-                className="flex-row items-center "
+                style={{ flexDirection: "row", alignItems: "center" }}
               >
-                <View className="w-10 h-10 rounded-full overflow-hidden  justify-center items-center">
+                <View
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: 20,
+                    overflow: "hidden",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
                   <CountryPicker
                     withFilter
                     withFlag
@@ -108,12 +194,22 @@ const signup = () => {
                   />
                 </View>
                 {country && (
-                  <Text className="ml-2 ">{`+${country.callingCode[0]}`}</Text>
+                  <Text style={{ marginLeft: 8, color: defaultTextColor }}>
+                    {`+${country.callingCode[0]}`}
+                  </Text>
                 )}
               </TouchableOpacity>
               <TextInput
-                className="flex-1 ml-2  rounded-lg px-3 py-2"
+                style={{
+                  flex: 1,
+                  marginLeft: 8,
+                  borderRadius: 8,
+                  paddingHorizontal: 12,
+                  paddingVertical: 8,
+                  color: defaultTextColor,
+                }}
                 placeholder="Enter your phone number"
+                placeholderTextColor={"#D1D3D4"}
                 keyboardType="phone-pad"
                 value={phoneNumber}
                 onChangeText={setPhoneNumber}
@@ -121,19 +217,40 @@ const signup = () => {
             </View>
           </View>
           <View>
-            <TouchableOpacity className="p-5 bg-[#efefef] mt-6 rounded-2xl">
-              <Text className="text-center text-xl font-bold">Sign Up</Text>
+            <TouchableOpacity
+              style={{
+                padding: 20,
+                backgroundColor: buttonBackgroundColor,
+                marginTop: 24,
+                borderRadius: 16,
+              }}
+            >
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontSize: 20,
+                  fontWeight: "bold",
+                  color: defaultTextColor,
+                }}
+              >
+                Sign Up
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
 
         {/**bottom parts */}
-        <View className="mt-7 justify-center items-center">
-          <View className="flex-row gap-2 p-4">
-            {" "}
-            <Text className="text-[#9A9FA5]">Create a New Account?</Text>
+        <View
+          style={{
+            marginTop: 28,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <View style={{ flexDirection: "row", gap: 8, padding: 16 }}>
+            <Text style={{ color: "#9A9FA5" }}>Create a New Account?</Text>
             <Text
-              className="text-blue-700 font-bold"
+              style={{ color: "#3B82F6", fontWeight: "bold" }}
               onPress={() => router.push("/signin/sign-in")}
             >
               Sign In
@@ -145,4 +262,4 @@ const signup = () => {
   );
 };
 
-export default signup;
+export default Signup;

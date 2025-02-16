@@ -7,11 +7,12 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import CountryPicker from "react-native-country-picker-modal";
 import logo from "@/assets/images/Logo.png";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { useRouter } from "expo-router";
+import { ThemeContext } from "@/app/Context/ThemeContext";
 const Signin = () => {
   const [countryCode, setCountryCode] = useState("US");
   const [country, setCountry] = useState(null);
@@ -29,18 +30,42 @@ const Signin = () => {
     console.log("entered phone", enteredPhone);
   }, [phoneNumber, country]);
 
+  const [defaultColor, setDefaultColor] = useState("#f9f9f9");
+  const [defaultTextColor, setDefaultTextColor] = useState("#000000"); // Default text color
+  const { isDark } = useContext(ThemeContext);
+
+  useEffect(() => {
+    if (isDark) {
+      setDefaultColor("#0f1621"); // Dark theme background color
+      setDefaultTextColor("#ffffff"); // Dark theme text color
+    } else {
+      setDefaultColor("#f9f9f9"); // Light theme background color
+      setDefaultTextColor("#000000"); // Light theme text color
+    }
+  }, [isDark]);
+
   return (
-    <SafeAreaView className="bg-white">
+    <SafeAreaView style={{ backgroundColor: defaultColor }}>
       <ScrollView>
         <View className="items-center justify-center mt-24">
           <Image source={logo} />
         </View>
         <View className="mt-20 px-4">
-          <Text className="text-4xl">Sign in</Text>
+          <Text className={isDark ? "text-4xl text-white" : "text-4xl"}>
+            Sign in
+          </Text>
           {/**input phone number */}
           <View className="mt-7">
-            <Text className="text-xl">Phone Number</Text>
-            <View className="flex-row items-center mt-2 bg-[#F5F5F5] p-3 rounded-2xl">
+            <Text className={isDark ? "text-xl text-white" : "text-xl"}>
+              Phone Number
+            </Text>
+            <View
+              className={
+                isDark
+                  ? "flex-row items-center mt-2 bg-[#808080] p-3 rounded-2xl"
+                  : "flex-row items-center mt-2 bg-[#F5F5F5] p-3 rounded-2xl"
+              }
+            >
               <TouchableOpacity
                 onPress={() => setIsCountryPickerVisible(true)}
                 className="flex-row items-center "
@@ -80,15 +105,31 @@ const Signin = () => {
           <View>
             <TouchableOpacity
               onPress={() => router.push("/verification/verification")}
-              className="p-5 bg-[#efefef] mt-6 rounded-2xl"
+              className={
+                isDark
+                  ? "p-5 bg-[#aaaaaa] mt-6 rounded-2xl"
+                  : `p-5 bg-[#efefef] mt-6 rounded-2xl`
+              }
             >
-              <Text className="text-center text-xl font-bold">Sign In</Text>
+              <Text
+                className={`text-center text-xl font-bold ${defaultTextColor}`}
+              >
+                Sign In
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
         {/**socials */}
         <View className="mt-14">
-          <Text className="text-center text-xl">Sign in with</Text>
+          <Text
+            className={
+              isDark
+                ? "text-center text-xl text-white"
+                : `text-center text-xl text-black`
+            }
+          >
+            Sign in with
+          </Text>
           <View className="flex-row justify-center items-center gap-5 mt-6">
             {" "}
             <TouchableOpacity className="border px-2 py-2 rounded-2xl border-gray-400 ">
@@ -101,7 +142,11 @@ const Signin = () => {
               />
             </TouchableOpacity>
             <TouchableOpacity className="border px-4 py-2 rounded-2xl border-gray-400">
-              <FontAwesome5 name="apple" size={34} color="#black" />
+              <FontAwesome5
+                name="apple"
+                size={34}
+                color={isDark ? "white" : "black"}
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -110,7 +155,11 @@ const Signin = () => {
         <View className="mt-7 justify-center items-center">
           <TouchableOpacity
             onPress={() => router.push("/verification/verification")}
-            className="p-5 justify-center items-center bg-[#fcfcfc] border rounded-2xl border-gray-200 w-3/4"
+            className={
+              isDark
+                ? `p-5 justify-center items-center bg-[#7e7e7e] border rounded-2xl border-gray-200 w-3/4`
+                : `p-5 justify-center items-center bg-[#fcfcfc] border rounded-2xl border-gray-200 w-3/4`
+            }
           >
             <Text className="text-center text-lg font-bold">
               Continue as a Guest
