@@ -6,13 +6,14 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import Feather from "@expo/vector-icons/Feather";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 interface MenuItem {
   title: string;
@@ -63,6 +64,12 @@ const data: MenuItem[] = [
   },
 ];
 export const DrawerContent = ({ navigation }: any) => {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
   return (
     <ScrollView style={{ flex: 1 }}>
       <LinearGradient
@@ -104,6 +111,39 @@ export const DrawerContent = ({ navigation }: any) => {
         <View className="flex-row items-center gap-2 border-t-2 border-white p-5">
           <AntDesign name="questioncircleo" size={24} color="white" />
           <Text className="text-white">Color Scheme</Text>
+        </View>
+        <View className="flex-row items-center justify-center bg-[#7e72ff] rounded-full p-1 shadow">
+          <TouchableOpacity
+            className={`flex-row gap-1 items-center justify-center rounded-full py-2 px-4 ${
+              !isChecked ? "bg-blue-100" : "bg-transparent"
+            }`}
+            onPress={handleCheckboxChange}
+          >
+            <Fontisto name="day-sunny" size={24} color="black" />
+            <Text
+              className={`text-sm font-medium ${
+                !isChecked ? "text-blue-500" : "text-gray-500"
+              }`}
+            >
+              Light Mode
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            className={`flex-row items-center rounded-full py-2 px-4 ${
+              isChecked ? "bg-blue-100" : "bg-transparent"
+            }`}
+            onPress={handleCheckboxChange}
+          >
+            <FontAwesome5 name="moon" size={24} color="black" />
+            <Text
+              className={`text-sm font-medium ${
+                isChecked ? "text-blue-500" : "text-gray-500"
+              }`}
+            >
+              Dark Mode
+            </Text>
+          </TouchableOpacity>
         </View>
       </LinearGradient>
     </ScrollView>
