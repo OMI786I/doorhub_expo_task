@@ -30,7 +30,7 @@ const UserProfile = () => {
         <View
           className={
             isDark
-              ? "items-center mt-8 bg-black p-6 w-[90%] rounded-2xl mx-auto shadow-md flex-row"
+              ? "items-center mt-8 bg-[#18202e] p-6 w-[90%] rounded-2xl mx-auto shadow-md flex-row"
               : "items-center mt-8 bg-white p-6 w-[90%] rounded-2xl mx-auto shadow-md flex-row"
           }
         >
@@ -63,7 +63,7 @@ const UserProfile = () => {
         <View
           className={
             isDark
-              ? "mt-8 bg-black p-6 w-[90%] rounded-2xl mx-auto shadow-md"
+              ? "mt-8 bg-[#19202e] p-6 w-[90%] rounded-2xl mx-auto shadow-md"
               : "mt-8 bg-white p-6 w-[90%] rounded-2xl mx-auto shadow-md"
           }
         >
@@ -81,12 +81,14 @@ const UserProfile = () => {
             <View
               className={
                 isDark
-                  ? "flex-row items-center bg-[#a8a8a8] p-4 rounded-2xl"
+                  ? "flex-row items-center bg-[#2f3643] p-4 rounded-2xl"
                   : "flex-row items-center bg-[#F5F5F5] p-4 rounded-2xl"
               }
             >
               <TextInput
-                className="flex-1 text-lg"
+                className={
+                  isDark ? "flex-1 text-lg text-white" : "flex-1 text-lg"
+                }
                 placeholder="Enter your phone number"
                 keyboardType="phone-pad"
                 value={"01740987587"}
@@ -109,12 +111,12 @@ const UserProfile = () => {
             <View
               className={
                 isDark
-                  ? "flex-row items-center bg-[#a8a8a8] p-4 rounded-2xl"
+                  ? "flex-row items-center bg-[#2f3643] p-4 rounded-2xl"
                   : "flex-row items-center bg-[#F5F5F5] p-4 rounded-2xl"
               }
             >
               <TextInput
-                className="text-lg"
+                className={isDark ? "text-white text-lg" : "text-lg"}
                 placeholder="Last name"
                 placeholderTextColor={"#D1D3D4"}
                 value={"sohrawardy147@gmail.com"}
@@ -137,12 +139,12 @@ const UserProfile = () => {
             <View
               className={
                 isDark
-                  ? "flex-row items-center bg-[#a8a8a8] p-4 rounded-2xl"
+                  ? "flex-row items-center bg-[#2f3643] p-4 rounded-2xl"
                   : "flex-row items-center bg-[#F5F5F5] p-4 rounded-2xl"
               }
             >
               <TextInput
-                className="text-lg"
+                className={isDark ? "text-white text-lg" : "text-lg"}
                 placeholder="Gender"
                 placeholderTextColor={"#D1D3D4"}
                 value={"Male"}
@@ -165,12 +167,12 @@ const UserProfile = () => {
             <View
               className={
                 isDark
-                  ? "flex-row items-center bg-[#a8a8a8] p-4 rounded-2xl"
+                  ? "flex-row items-center bg-[#2f3643] p-4 rounded-2xl"
                   : "flex-row items-center bg-[#F5F5F5] p-4 rounded-2xl"
               }
             >
               <TextInput
-                className="text-lg"
+                className={isDark ? "text-lg text-white" : "text-lg"}
                 placeholder="Birth Date"
                 placeholderTextColor={"#D1D3D4"}
                 value={"15 Aug 1998"}

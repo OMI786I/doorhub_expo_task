@@ -62,7 +62,7 @@ const Signin = () => {
             <View
               className={
                 isDark
-                  ? "flex-row items-center mt-2 bg-[#808080] p-3 rounded-2xl"
+                  ? "flex-row items-center mt-2 bg-[#18202e] p-3 rounded-2xl"
                   : "flex-row items-center mt-2 bg-[#F5F5F5] p-3 rounded-2xl"
               }
             >
@@ -107,12 +107,16 @@ const Signin = () => {
               onPress={() => router.push("/verification/verification")}
               className={
                 isDark
-                  ? "p-5 bg-[#aaaaaa] mt-6 rounded-2xl"
+                  ? "p-5 bg-[#2f3643] mt-6 rounded-2xl"
                   : `p-5 bg-[#efefef] mt-6 rounded-2xl`
               }
             >
               <Text
-                className={`text-center text-xl font-bold ${defaultTextColor}`}
+                className={
+                  isDark
+                    ? `text-center text-xl font-bold text-white`
+                    : `text-center text-xl font-bold text-black`
+                }
               >
                 Sign In
               </Text>
@@ -157,11 +161,17 @@ const Signin = () => {
             onPress={() => router.push("/verification/verification")}
             className={
               isDark
-                ? `p-5 justify-center items-center bg-[#7e7e7e] border rounded-2xl border-gray-200 w-3/4`
+                ? `p-5 justify-center items-center bg-[#29303c] border rounded-2xl border-gray-200 w-3/4`
                 : `p-5 justify-center items-center bg-[#fcfcfc] border rounded-2xl border-gray-200 w-3/4`
             }
           >
-            <Text className="text-center text-lg font-bold">
+            <Text
+              className={
+                isDark
+                  ? "text-center text-lg font-bold text-white"
+                  : "text-center text-lg font-bold"
+              }
+            >
               Continue as a Guest
             </Text>
           </TouchableOpacity>
