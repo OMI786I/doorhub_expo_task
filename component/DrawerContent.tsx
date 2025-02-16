@@ -14,6 +14,7 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import Feather from "@expo/vector-icons/Feather";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 interface MenuItem {
   title: string;
@@ -64,6 +65,7 @@ const data: MenuItem[] = [
   },
 ];
 export const DrawerContent = ({ navigation }: any) => {
+  const router = useRouter();
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
@@ -87,7 +89,9 @@ export const DrawerContent = ({ navigation }: any) => {
               <Text className="text-xl font-bold text-white">
                 Tahid Sohrawardy Omi
               </Text>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => router.push("/(root)/(drawer)/user/user")}
+              >
                 <AntDesign name="edit" size={20} color="white" />
               </TouchableOpacity>
             </View>
