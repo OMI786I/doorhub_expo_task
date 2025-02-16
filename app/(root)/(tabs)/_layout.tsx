@@ -21,7 +21,7 @@ export default function AppLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: "blue",
-
+        tabBarShowLabel: false,
         tabBarPosition: "top",
       }}
     >
@@ -29,6 +29,7 @@ export default function AppLayout() {
         name="index"
         options={{
           // title: "Home",
+          tabBarShowLabel: false,
           headerTitle: () => <CustomHeader title="Home" />,
           headerStyle: {
             backgroundColor: "#f9f9f9",
