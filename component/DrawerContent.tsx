@@ -6,15 +6,16 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useContext, useEffect, useState } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { LinearGradient } from "expo-linear-gradient";
-import Ionicons from "@expo/vector-icons/Ionicons";
+
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import Feather from "@expo/vector-icons/Feather";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 import { useRouter } from "expo-router";
+import { ThemeContext } from "@/app/Context/ThemeContext";
 
 interface MenuItem {
   title: string;
@@ -65,17 +66,30 @@ const data: MenuItem[] = [
   },
 ];
 export const DrawerContent = ({ navigation }: any) => {
+  const [defaultColor, setDefaultColor] = useState("#6759ff");
+  const [defaultbgColor, setDefaultbgColor] = useState("#6759ff");
   const router = useRouter();
   const [isChecked, setIsChecked] = useState(false);
-
+  const { isDark, toggleTheme } = useContext(ThemeContext);
+  console.log(isDark);
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
+    toggleTheme();
   };
+  useEffect(() => {
+    if (isDark) {
+      setDefaultColor("#18202e");
+      setDefaultbgColor("#2f3643");
+    } else {
+      setDefaultColor("#6759ff");
+      setDefaultbgColor("#7e72ff");
+    }
+  }, [isDark]);
 
   return (
     <ScrollView style={{ flex: 1 }}>
       <LinearGradient
-        colors={["#6759ff", "#6759ff"]}
+        colors={[defaultColor, defaultColor]}
         style={{ flex: 1, minHeight: "100%", padding: 30 }}
       >
         {/* User Profile Section */}
@@ -116,7 +130,9 @@ export const DrawerContent = ({ navigation }: any) => {
           <AntDesign name="questioncircleo" size={24} color="white" />
           <Text className="text-white">Color Scheme</Text>
         </View>
-        <View className="flex-row items-center justify-center bg-[#7e72ff] rounded-full p-1 shadow">
+        <View
+          className={`flex-row items-center justify-center bg-[${defaultbgColor}] rounded-full p-1 shadow`}
+        >
           <TouchableOpacity
             className={`flex-row gap-1 items-center justify-center rounded-full py-2 px-4 ${
               !isChecked ? "bg-blue-100" : "bg-transparent"

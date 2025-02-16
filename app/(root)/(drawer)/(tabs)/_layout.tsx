@@ -1,12 +1,30 @@
 import { Slot, Redirect, useRouter, Tabs, useNavigation } from "expo-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { CustomHeader } from "@/component/CustomHeader";
 import { DrawerActions } from "@react-navigation/native";
+import { ThemeContext } from "@/app/Context/ThemeContext";
 export default function AppLayout() {
+  const [defaultColor, setDefaultColor] = useState("#f9f9f9");
+  const [defaultTextColor, setDefaultTextColor] = useState("#000000"); // Default text color
+  const [defaultNavTextColor, setDefaultNavTextColor] = useState("#18202e"); // Default text color
+  const { isDark } = useContext(ThemeContext);
+
+  useEffect(() => {
+    if (isDark) {
+      setDefaultColor("#0f1621"); // Dark theme background color
+      setDefaultTextColor("#ffffff"); // Dark theme text color
+      setDefaultNavTextColor("#18202e"); // Dark theme text color
+    } else {
+      setDefaultColor("#f9f9f9"); // Light theme background color
+      setDefaultTextColor("#000000"); // Light theme text color
+      setDefaultNavTextColor("#f9f9f9"); // Light theme text color
+    }
+  }, [isDark]);
+
   const [user, setUser] = useState(false);
   const router = useRouter();
   const navigation = useNavigation();
@@ -24,6 +42,9 @@ export default function AppLayout() {
         tabBarActiveTintColor: "blue",
         tabBarShowLabel: false,
         tabBarPosition: "top",
+        tabBarStyle: {
+          backgroundColor: defaultNavTextColor,
+        },
       }}
     >
       <Tabs.Screen
@@ -33,7 +54,7 @@ export default function AppLayout() {
           tabBarShowLabel: false,
           headerTitle: () => <CustomHeader title="Home" />,
           headerStyle: {
-            backgroundColor: "#f9f9f9",
+            backgroundColor: defaultColor,
             shadowOpacity: 0,
             elevation: 0,
           },
@@ -48,7 +69,7 @@ export default function AppLayout() {
           headerTitle: () => <CustomHeader title="Bookings" />,
 
           headerStyle: {
-            backgroundColor: "#f9f9f9",
+            backgroundColor: defaultColor,
             shadowOpacity: 0,
             elevation: 0,
           },
@@ -64,7 +85,7 @@ export default function AppLayout() {
             <CustomHeader title="Notifications" button="Recent" icon="down" />
           ),
           headerStyle: {
-            backgroundColor: "#f9f9f9",
+            backgroundColor: defaultColor,
             shadowOpacity: 0,
             elevation: 0,
           },

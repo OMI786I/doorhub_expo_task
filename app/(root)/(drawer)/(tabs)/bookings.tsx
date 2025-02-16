@@ -1,10 +1,24 @@
 import { View, Text } from "react-native";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { ThemeContext } from "@/app/Context/ThemeContext";
 
 const bookings = () => {
+  const [defaultColor, setDefaultColor] = useState("#f9f9f9");
+  const [defaultTextColor, setDefaultTextColor] = useState("#000000"); // Default text color
+  const { isDark } = useContext(ThemeContext);
+
+  useEffect(() => {
+    if (isDark) {
+      setDefaultColor("#0f1621"); // Dark theme background color
+      setDefaultTextColor("#ffffff"); // Dark theme text color
+    } else {
+      setDefaultColor("#f9f9f9"); // Light theme background color
+      setDefaultTextColor("#000000"); // Light theme text color
+    }
+  }, [isDark]);
   return (
-    <View className="bg-[#f9f9f9] min-h-screen">
-      <Text>Bookings</Text>
+    <View className={`bg-[${defaultColor}]  flex-1`}>
+      <Text className={`text-[${defaultTextColor}]`}>Bookings</Text>
     </View>
   );
 };
