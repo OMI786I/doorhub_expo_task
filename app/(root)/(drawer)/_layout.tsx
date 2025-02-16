@@ -12,8 +12,8 @@ export default function Layout() {
       }}
     >
       {" "}
-      <Drawer.Screen name="index" />
-      <Drawer.Screen name="settings" />
+      <Drawer.Screen name="(tabs)" />
+      <Drawer.Screen name="user" />
     </Drawer>
   );
 }

@@ -9,10 +9,11 @@ export default function RootLayout() {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="verification" options={{}} />
-        <Stack.Screen name="index" options={{}} />
+        <Stack.Screen name="Context" options={{}} />
+        <Stack.Screen name="(root)" options={{}} />
         <Stack.Screen name="(auth)" options={{}} />
         <Stack.Screen name="onboarding" options={{}} />
+        <Stack.Screen name="verification" options={{}} />
       </Stack>
     </ThemeProvider>
   );
