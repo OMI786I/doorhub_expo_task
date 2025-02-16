@@ -39,7 +39,6 @@ const UserProfile = () => {
             source={{ uri: "https://i.ibb.co/nqpJrWtt/avatar.jpg" }}
           />
           <View>
-            {" "}
             <Text
               className={
                 isDark

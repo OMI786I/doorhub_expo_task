@@ -35,7 +35,6 @@ export const CustomHeader = ({
   return (
     <View className="flex-row items-center min-w-full  justify-between ">
       <View className="flex-row">
-        {" "}
         <View
           style={{
             width: 5,

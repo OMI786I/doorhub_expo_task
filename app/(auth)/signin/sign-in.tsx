@@ -135,7 +135,6 @@ const Signin = () => {
             Sign in with
           </Text>
           <View className="flex-row justify-center items-center gap-5 mt-6">
-            {" "}
             <TouchableOpacity className="border px-2 py-2 rounded-2xl border-gray-400 ">
               <FontAwesome5 name="facebook" size={34} color="#1977f3" />
             </TouchableOpacity>
@@ -176,7 +175,6 @@ const Signin = () => {
             </Text>
           </TouchableOpacity>
           <View className="flex-row gap-2 p-4">
-            {" "}
             <Text className="text-[#9A9FA5]">Create a New Account?</Text>
             <Text
               className="text-blue-700 font-bold"

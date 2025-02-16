@@ -11,7 +11,6 @@ export default function Layout() {
         drawerPosition: "left",
       }}
     >
-      {" "}
       <Drawer.Screen name="(tabs)" />
       <Drawer.Screen name="user" />
     </Drawer>

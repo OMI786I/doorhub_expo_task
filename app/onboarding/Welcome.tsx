@@ -22,7 +22,7 @@ import { ThemeContext } from "../Context/ThemeContext";
 const Welcome = () => {
   const router = useRouter();
   const [showData, setShowData] = useState(1);
-  const [renderData, setRenderData] = useState([]);
+  const [renderData, setRenderData] = useState<Data[]>([]);
 
   interface Data {
     id: number;
@@ -46,7 +46,7 @@ const Welcome = () => {
     {
       id: 2,
       image: image2,
-      title: " Plumber & expart nearby you",
+      title: " Plumber & exprt nearby you",
       description:
         "Find expert plumbers near you for quick and reliable services.",
       slogan: ["Help", "Plumbing", "Repair", "Service", "install"],
