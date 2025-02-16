@@ -10,6 +10,9 @@ import React, { ReactNode } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import Fontisto from "@expo/vector-icons/Fontisto";
+import Feather from "@expo/vector-icons/Feather";
 
 interface MenuItem {
   title: string;
@@ -18,28 +21,18 @@ interface MenuItem {
 }
 const data: MenuItem[] = [
   {
-    title: "Orders",
-    icons: <Ionicons name="basket-outline" size={28} color="white" />,
+    title: "Calender",
+    icons: <AntDesign name="carryout" size={28} color="white" />,
     link: "/",
   },
   {
-    title: "Wishlist",
-    icons: <AntDesign name="hearto" size={28} color="white" />,
-    link: "/",
-  },
-  {
-    title: "Delivery Address",
-    icons: <Ionicons name="map" size={28} color="white" />,
-    link: "/",
-  },
-  {
-    title: "Payment Method",
+    title: "Payment Methods",
     icons: <AntDesign name="creditcard" size={24} color="white" />,
     link: "/",
   },
   {
-    title: "Promo",
-    icons: <AntDesign name="carryout" size={24} color="white" />,
+    title: "Address",
+    icons: <FontAwesome5 name="map-marker-alt" size={24} color="white" />,
     link: "/",
   },
   {
@@ -48,13 +41,24 @@ const data: MenuItem[] = [
     link: "/",
   },
   {
-    title: "Help",
-    icons: <AntDesign name="question" size={24} color="white" />,
+    title: "Offers",
+    icons: <Fontisto name="shopping-sale" size={24} color="white" />,
     link: "/",
   },
   {
-    title: "About",
-    icons: <AntDesign name="exclamation" size={24} color="white" />,
+    title: "Promo",
+    icons: <AntDesign name="carryout" size={24} color="white" />,
+    link: "/",
+  },
+
+  {
+    title: "Refer a friend",
+    icons: <Feather name="users" size={24} color="white" />,
+    link: "/",
+  },
+  {
+    title: "Support",
+    icons: <Feather name="phone-call" size={24} color="white" />,
     link: "/",
   },
 ];
@@ -62,7 +66,7 @@ export const DrawerContent = ({ navigation }: any) => {
   return (
     <ScrollView style={{ flex: 1 }}>
       <LinearGradient
-        colors={["#7F77FE", "#A573FF"]}
+        colors={["#6759ff", "#6759ff"]}
         style={{ flex: 1, minHeight: "100%", padding: 30 }}
       >
         {/* User Profile Section */}
@@ -97,6 +101,10 @@ export const DrawerContent = ({ navigation }: any) => {
             );
           }}
         />
+        <View className="flex-row items-center gap-2 border-t-2 border-white p-5">
+          <AntDesign name="questioncircleo" size={24} color="white" />
+          <Text className="text-white">Color Scheme</Text>
+        </View>
       </LinearGradient>
     </ScrollView>
   );
