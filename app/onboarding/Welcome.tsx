@@ -82,7 +82,7 @@ const Welcome = () => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
+      <ScrollView className="bg-white min-h-screen">
         {/**top part */}
         <View className="relative">
           {" "}
