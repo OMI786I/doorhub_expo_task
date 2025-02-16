@@ -58,7 +58,9 @@ export default function AppLayout() {
       <Tabs.Screen
         name="notifications"
         options={{
-          headerTitle: () => <CustomHeader title="Notifications" />,
+          headerTitle: () => (
+            <CustomHeader title="Notifications" button="Recent" icon="down" />
+          ),
           headerStyle: {
             backgroundColor: "#f9f9f9",
             shadowOpacity: 0,
