@@ -39,7 +39,7 @@ const verification = () => {
         {/**button */}
         <TouchableOpacity
           className="mt-16 p-5 justify-center items-center bg-[#efefef] rounded-2xl"
-          onPress={() => router.push("/home/home")}
+          onPress={() => router.push("/")}
         >
           <Text className="text-lg font-bold">Continue</Text>
         </TouchableOpacity>
