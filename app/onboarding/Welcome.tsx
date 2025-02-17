@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   Image,
   FlatList,
-  ScrollView,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import image1 from "@/assets/images/welcome_image_1.png";
@@ -91,146 +90,116 @@ const Welcome = () => {
 
   return (
     <SafeAreaView style={{ backgroundColor: defaultColor, flex: 1 }}>
-      <ScrollView>
-        {/**top part */}
-        <View className="relative">
-          <View className="items-end p-6">
-            <TouchableOpacity
-              onPress={() => router.push("/signin/sign-in")}
-              className="bg-[#B5EBCD] p-2 rounded-3xl w-[15%]"
-            >
-              <Text className="text-center">Skip</Text>
-            </TouchableOpacity>
-          </View>
-          <View className="bg-[#FFCACA] w-[80] h-[80] rounded-full absolute -left-10 -top-7"></View>
+      {/**top part */}
+      <View className="relative">
+        <View className="items-end p-6">
+          <TouchableOpacity
+            onPress={() => router.push("/signin/sign-in")}
+            className="bg-[#B5EBCD] p-2 rounded-3xl w-[15%]"
+          >
+            <Text className="text-center">Skip</Text>
+          </TouchableOpacity>
         </View>
+        <View className="bg-[#FFCACA] w-[80] h-[80] rounded-full absolute -left-10 -top-7"></View>
+      </View>
 
-        <FlatList
-          data={renderData}
-          renderItem={({ item }) => {
-            return (
-              <View>
-                {/**middle part */}
-                <View className="relative">
-                  <View className="w-[193.54px] h-[382.85px] mx-auto justify-center rounded-3xl relative">
-                    <View className="bg-[#CABDFF] rounded-full pt-6 h-[80%] w-full mx-auto"></View>
-                    <Image
-                      source={item.image}
-                      className="w-full h-[95%] rounded-full absolute overflow-hidden"
-                      resizeMode="cover"
-                    />
-                  </View>
-                  {/**Stripe design */}
-                  <View className="-rotate-[10deg] absolute bottom-16">
-                    <FlatList
-                      showsHorizontalScrollIndicator={false}
-                      scrollEnabled={false}
-                      horizontal
-                      contentContainerClassName="-left-2"
-                      data={item.slogan}
-                      renderItem={({ item: sloganItem }) => {
-                        return (
-                          <View>
-                            <View className="relative">
-                              <Image
-                                className="-ml-[5px]"
-                                source={item.stripeImage}
-                              />
-                              <Text className="text-white text-center absolute top-5 left-[17px]">
-                                {sloganItem}
-                              </Text>
-                            </View>
-                          </View>
-                        );
-                      }}
-                    />
-                  </View>
-                  {/**Stripe2 design */}
-                  <View className="-z-10 rotate-[10deg] absolute bottom-16">
-                    <FlatList
-                      showsHorizontalScrollIndicator={false}
-                      scrollEnabled={false}
-                      horizontal
-                      contentContainerClassName="-left-1"
-                      data={item.slogan}
-                      renderItem={({ item }) => {
-                        return (
-                          <View>
-                            <View className="relative">
-                              <Image
-                                className="-ml-[5px]"
-                                source={require("@/assets/images/Subtract2.png")}
-                              />
-                              <Text className="text-[#678593] text-center absolute top-5 left-[17px]">
-                                {item}
-                              </Text>
-                            </View>
-                          </View>
-                        );
-                      }}
-                    />
-                  </View>
+      {renderData.map((item) => (
+        <View key={item.id}>
+          {/**middle part */}
+          <View className="relative">
+            <View className="w-[193.54px] h-[382.85px] mx-auto justify-center rounded-3xl relative">
+              <View className="bg-[#CABDFF] rounded-full pt-6 h-[80%] w-full mx-auto"></View>
+              <Image
+                source={item.image}
+                className="w-full h-[95%] rounded-full absolute overflow-hidden"
+                resizeMode="cover"
+              />
+            </View>
+            {/**Stripe design */}
+
+            <View className="-rotate-[10deg] flex-row absolute bottom-16">
+              {item?.slogan?.map((res: string, index: number) => (
+                <View className="relative " key={index}>
+                  <Image className="-ml-[5px]" source={item.stripeImage} />
+                  <Text className="text-[#ffffff] text-center absolute top-5 left-3 ">
+                    {res}
+                  </Text>
                 </View>
-                {/**lower part */}
-                <View className="mx-auto mt-9">
-                  {/**progress circle */}
-                  <View className="flex-row justify-center gap-4">
-                    {data.map((item) => (
-                      <View
-                        key={item.id}
-                        className={`w-3 h-3 rounded-full ${
-                          item.id === showData
-                            ? "bg-[#6759FF]"
-                            : "bg-[#6759FF] opacity-20"
-                        }`}
-                      />
-                    ))}
-                  </View>
-                  {/**title & description */}
-                  <View className="mt-8 px-10">
-                    <Text
-                      style={{ color: defaultTextColor }}
-                      className="font-bold text-center text-3xl"
-                    >
-                      {item.title}
-                    </Text>
-                  </View>
-                  <View>
-                    <Text
-                      style={{ color: defaultTextColor }}
-                      className="text-center px-3 mt-2"
-                    >
-                      {item.description}
-                    </Text>
-                  </View>
+              ))}
+            </View>
+
+            {/**Stripe2 design */}
+            <View className="-z-10 flex-row rotate-[10deg] absolute bottom-16">
+              {item?.slogan?.map((res: string, index: number) => (
+                <View className="relative" key={index}>
+                  <Image
+                    className="-ml-[5px]"
+                    source={require("@/assets/images/Subtract2.png")}
+                  />
+                  <Text className="text-[#678593] text-center absolute top-5 left-[17px]">
+                    {res}
+                  </Text>
                 </View>
-                {/**Button */}
-                {showData === 3 ? (
-                  <View className="mx-auto mt-10">
-                    <TouchableOpacity
-                      onPress={() => router.push("/signin/sign-in")}
-                      className="p-4 px-12 rounded-xl bg-[#6759ff]"
-                    >
-                      <Text className="text-white">Get Started</Text>
-                    </TouchableOpacity>
-                  </View>
-                ) : (
-                  <View className="mx-auto mt-10">
-                    <TouchableOpacity
-                      onPress={() => handleNextPage()}
-                      className="rounded-full bg-[#6759FF] p-4"
-                    >
-                      <Text>
-                        <AntDesign name="right" size={24} color="white" />
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                )}
-              </View>
-            );
-          }}
-        />
-      </ScrollView>
+              ))}
+            </View>
+          </View>
+          {/**lower part */}
+          <View className="mx-auto mt-9">
+            {/**progress circle */}
+            <View className="flex-row justify-center gap-4">
+              {data.map((item) => (
+                <View
+                  key={item.id}
+                  className={`w-3 h-3 rounded-full ${
+                    item.id === showData
+                      ? "bg-[#6759FF]"
+                      : "bg-[#6759FF] opacity-20"
+                  }`}
+                />
+              ))}
+            </View>
+            {/**title & description */}
+            <View className="mt-8 px-10">
+              <Text
+                style={{ color: defaultTextColor }}
+                className="font-bold text-center text-3xl"
+              >
+                {item.title}
+              </Text>
+            </View>
+            <View>
+              <Text
+                style={{ color: defaultTextColor }}
+                className="text-center px-3 mt-2"
+              >
+                {item.description}
+              </Text>
+            </View>
+          </View>
+          {/**Button */}
+          {showData === 3 ? (
+            <View className="mx-auto mt-10">
+              <TouchableOpacity
+                onPress={() => router.push("/signin/sign-in")}
+                className="p-4 px-12 rounded-xl bg-[#6759ff]"
+              >
+                <Text className="text-white">Get Started</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <View className="mx-auto mt-10">
+              <TouchableOpacity
+                onPress={() => handleNextPage()}
+                className="rounded-full bg-[#6759FF] p-4"
+              >
+                <Text>
+                  <AntDesign name="right" size={24} color="white" />
+                </Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
+      ))}
     </SafeAreaView>
   );
 };
