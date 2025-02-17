@@ -4,19 +4,12 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Image,
-  FlatList,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
-import image1 from "@/assets/images/welcome_image_1.png";
-import image2 from "@/assets/images/welcome_image_2.png";
-import image3 from "@/assets/images/welcome_image_3.png";
-import stringImg1 from "@/assets/images/Subtract1.png";
-import stringImg2 from "@/assets/images/Subtract3.png";
-import stringImg3 from "@/assets/images/Subtract4.png";
-
 import { useRouter } from "expo-router";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { ThemeContext } from "../Context/ThemeContext";
+import images from "@/constants/images";
 
 const Welcome = () => {
   const router = useRouter();
@@ -35,30 +28,30 @@ const Welcome = () => {
   const data: Data[] = [
     {
       id: 1,
-      image: image1,
+      image: images.onboarding1,
       title: "Beauty parlour at your home",
       description:
         "Get professional beauty parlour services at your home for a relaxing and luxurious experience.",
       slogan: ["Hair Style", "Makeup", "Beauty", "HairStyle", "Facial"],
-      stripeImage: stringImg1,
+      stripeImage: images.stripe1,
     },
     {
       id: 2,
-      image: image2,
+      image: images.onboarding2,
       title: " Plumber & exprt nearby you",
       description:
         "Find expert plumbers near you for quick and reliable services.",
       slogan: ["Help", "Plumbing", "Repair", "Service", "install"],
-      stripeImage: stringImg2,
+      stripeImage: images.stripe3,
     },
     {
       id: 3,
-      image: image3,
+      image: images.onboarding3,
       title: " Professional home cleaning",
       description:
         "Expert home cleaning services for a spotless and refreshed living space.",
       slogan: ["Mop", "Home", "Cleaning", "Kitchen", "Carpet"],
-      stripeImage: stringImg3,
+      stripeImage: images.stripe4,
     },
   ];
 
@@ -111,13 +104,13 @@ const Welcome = () => {
               <View className="bg-[#CABDFF] rounded-full pt-6 h-[80%] w-full mx-auto"></View>
               <Image
                 source={item.image}
-                className="w-full h-[95%] rounded-full absolute overflow-hidden"
+                className="w-full z-20 h-[95%] rounded-full absolute overflow-hidden"
                 resizeMode="cover"
               />
             </View>
             {/**Stripe design */}
 
-            <View className="-rotate-[10deg] flex-row absolute bottom-16">
+            <View className="z-20  -rotate-[10deg] flex-row absolute bottom-16">
               {item?.slogan?.map((res: string, index: number) => (
                 <View className="relative " key={index}>
                   <Image className="-ml-[5px]" source={item.stripeImage} />
@@ -129,13 +122,10 @@ const Welcome = () => {
             </View>
 
             {/**Stripe2 design */}
-            <View className="-z-10 flex-row rotate-[10deg] absolute bottom-16">
+            <View className="z-10 flex-row rotate-[10deg] absolute bottom-16">
               {item?.slogan?.map((res: string, index: number) => (
                 <View className="relative" key={index}>
-                  <Image
-                    className="-ml-[5px]"
-                    source={require("@/assets/images/Subtract2.png")}
-                  />
+                  <Image className="-ml-[5px]" source={images.stripe2} />
                   <Text className="text-[#678593] text-center absolute top-5 left-[17px]">
                     {res}
                   </Text>
