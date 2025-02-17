@@ -15,8 +15,39 @@ import { useRouter } from "expo-router";
 import { ThemeContext } from "@/app/Context/ThemeContext";
 
 const Signup = () => {
-  const [countryCode, setCountryCode] = useState("US");
-  const [country, setCountry] = useState(null);
+  const [countryCode, setCountryCode] = useState<
+    | "US"
+    | "AF"
+    | "AL"
+    | "DZ"
+    | "AS"
+    | "AD"
+    | "AO"
+    | "AI"
+    | "AQ"
+    | "AG"
+    | "AR"
+    | "AM"
+    | "AW"
+    | "AU"
+    | "AT"
+    | "AZ"
+    | "BS"
+    | "BH"
+    | "BD"
+    | "BB"
+    | "BY"
+    | "BE"
+    | "BZ"
+    | "BJ"
+    | "BM"
+    | "BT"
+    | "BO"
+    | "AX"
+  >("US");
+  const [country, setCountry] = useState<{ callingCode: string[] } | null>(
+    null
+  );
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isCountryPickerVisible, setIsCountryPickerVisible] = useState(false);
   const [firstName, setFirstName] = useState("");
@@ -44,7 +75,7 @@ const Signup = () => {
     }
   }, [isDark]);
 
-  const onSelectCountry = (country) => {
+  const onSelectCountry = (country: any) => {
     setCountryCode(country.cca2);
     setCountry(country);
   };

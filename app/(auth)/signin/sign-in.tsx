@@ -8,19 +8,19 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
-import CountryPicker from "react-native-country-picker-modal";
+import CountryPicker, { CountryCode } from "react-native-country-picker-modal";
 import logo from "@/assets/images/Logo.png";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { useRouter } from "expo-router";
 import { ThemeContext } from "@/app/Context/ThemeContext";
 const Signin = () => {
-  const [countryCode, setCountryCode] = useState("US");
-  const [country, setCountry] = useState(null);
+  const [countryCode, setCountryCode] = useState<CountryCode>("US");
+  const [country, setCountry] = useState<{ [key: string]: string }>();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isLogged, setIsLogged] = useState(false);
   const [isCountryPickerVisible, setIsCountryPickerVisible] = useState(false);
   const router = useRouter();
-  const onSelectCountry = (country) => {
+  const onSelectCountry = (country: any) => {
     setCountryCode(country.cca2);
     setCountry(country);
   };
@@ -135,7 +135,6 @@ const Signin = () => {
             Sign in with
           </Text>
           <View className="flex-row justify-center items-center gap-5 mt-6">
-            {" "}
             <TouchableOpacity className="border px-2 py-2 rounded-2xl border-gray-400 ">
               <FontAwesome5 name="facebook" size={34} color="#1977f3" />
             </TouchableOpacity>
@@ -176,7 +175,6 @@ const Signin = () => {
             </Text>
           </TouchableOpacity>
           <View className="flex-row gap-2 p-4">
-            {" "}
             <Text className="text-[#9A9FA5]">Create a New Account?</Text>
             <Text
               className="text-blue-700 font-bold"
