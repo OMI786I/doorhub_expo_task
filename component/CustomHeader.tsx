@@ -59,9 +59,9 @@ export const CustomHeader = ({
           >
             <Text className={`text-[${defaultButtonColor}]`}>{button}</Text>
             {isDark ? (
-              <AntDesign name={icon} size={14} color="white" />
+              <AntDesign icon={icon} size={14} color="white" />
             ) : (
-              <AntDesign name={icon} size={14} color="black" />
+              <AntDesign icon={icon} size={14} color="black" />
             )}
           </TouchableOpacity>
         )}

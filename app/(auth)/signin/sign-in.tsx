@@ -8,19 +8,19 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
-import CountryPicker from "react-native-country-picker-modal";
+import CountryPicker, { CountryCode } from "react-native-country-picker-modal";
 import logo from "@/assets/images/Logo.png";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { useRouter } from "expo-router";
 import { ThemeContext } from "@/app/Context/ThemeContext";
 const Signin = () => {
-  const [countryCode, setCountryCode] = useState("US");
-  const [country, setCountry] = useState(null);
+  const [countryCode, setCountryCode] = useState<CountryCode>("US");
+  const [country, setCountry] = useState<{ [key: string]: string }>();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isLogged, setIsLogged] = useState(false);
   const [isCountryPickerVisible, setIsCountryPickerVisible] = useState(false);
   const router = useRouter();
-  const onSelectCountry = (country) => {
+  const onSelectCountry = (country: any) => {
     setCountryCode(country.cca2);
     setCountry(country);
   };
