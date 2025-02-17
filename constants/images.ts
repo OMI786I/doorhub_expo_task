@@ -5,6 +5,7 @@ import stripe1 from "@/assets/images/Subtract1.png";
 import stripe2 from "@/assets/images/Subtract2.png";
 import stripe3 from "@/assets/images/Subtract3.png";
 import stripe4 from "@/assets/images/Subtract4.png";
+import logo from "@/assets/images/Logo.png";
 
 export default {
   onboarding1,
@@ -14,4 +15,5 @@ export default {
   stripe2,
   stripe3,
   stripe4,
+  logo,
 };

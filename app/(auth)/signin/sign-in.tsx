@@ -8,16 +8,18 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
-import CountryPicker, { CountryCode } from "react-native-country-picker-modal";
-import logo from "@/assets/images/Logo.png";
+import CountryPicker, {
+  CountryCode,
+  DARK_THEME,
+} from "react-native-country-picker-modal";
+import images from "@/constants/images";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { useRouter } from "expo-router";
 import { ThemeContext } from "@/app/Context/ThemeContext";
 const Signin = () => {
   const [countryCode, setCountryCode] = useState<CountryCode>("US");
   const [country, setCountry] = useState<{ [key: string]: string }>();
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [isLogged, setIsLogged] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [isCountryPickerVisible, setIsCountryPickerVisible] = useState(false);
   const router = useRouter();
   const onSelectCountry = (country: any) => {
@@ -26,7 +28,8 @@ const Signin = () => {
   };
 
   useEffect(() => {
-    const enteredPhone = country?.callingCode[0] + phoneNumber;
+    const enteredPhone = country?.callingCode?.[0] ?? "" + phoneNumber;
+
     console.log("entered phone", enteredPhone);
   }, [phoneNumber, country]);
 
@@ -48,7 +51,7 @@ const Signin = () => {
     <SafeAreaView style={{ backgroundColor: defaultColor }}>
       <ScrollView>
         <View className="items-center justify-center mt-24">
-          <Image source={logo} />
+          <Image source={images.logo} />
         </View>
         <View className="mt-20 px-4">
           <Text className={isDark ? "text-4xl text-white" : "text-4xl"}>
@@ -72,20 +75,21 @@ const Signin = () => {
               >
                 <View className="w-10 h-10 rounded-full overflow-hidden  justify-center items-center">
                   <CountryPicker
-                    withFilter
-                    withFlag
+                    withFilter={true}
+                    withFlag={true}
                     withCountryNameButton={false}
-                    withAlphaFilter
-                    withCallingCode
-                    withEmoji
+                    withAlphaFilter={true}
+                    withCallingCode={true}
                     onSelect={onSelectCountry}
                     visible={isCountryPickerVisible}
                     onClose={() => setIsCountryPickerVisible(false)}
                     countryCode={countryCode}
+                    withEmoji={false}
                     containerButtonStyle={{
                       width: "100%",
                       height: "100%",
                     }}
+                    theme={isDark ? DARK_THEME : undefined}
                   />
                 </View>
                 {country && (
