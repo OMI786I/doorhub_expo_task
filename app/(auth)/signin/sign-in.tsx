@@ -143,10 +143,7 @@ const Signin = () => {
               <FontAwesome5 name="facebook" size={34} color="#1977f3" />
             </TouchableOpacity>
             <TouchableOpacity className="border p-2 rounded-2xl border-gray-400">
-              <Image
-                source={require("@/assets/images/google.png")}
-                className="w-8 p-5"
-              />
+              <Image source={images.googleLogo} className="w-8 p-5" />
             </TouchableOpacity>
             <TouchableOpacity className="border px-4 py-2 rounded-2xl border-gray-400">
               <FontAwesome5

@@ -5,9 +5,16 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+  RefObject,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useRouter } from "expo-router";
 import { ThemeContext } from "../Context/ThemeContext";
+import { OTPInput } from "@/component/OtpInput";
 
 const Verification = () => {
   const [defaultColor, setDefaultColor] = useState("#f9f9f9");
@@ -15,7 +22,15 @@ const Verification = () => {
   const [inputBgColor, setInputBgColor] = useState("#efefef");
   const [buttonBgColor, setButtonBgColor] = useState("#efefef");
   const { isDark } = useContext(ThemeContext);
-
+  const [codes, setCodes] = useState<string[] | undefined>(Array(4).fill(""));
+  const refs: RefObject<TextInput>[] = [
+    useRef<TextInput>(null),
+    useRef<TextInput>(null),
+    useRef<TextInput>(null),
+    useRef<TextInput>(null),
+    useRef<TextInput>(null),
+    useRef<TextInput>(null),
+  ];
   useEffect(() => {
     if (isDark) {
       setDefaultColor("#0f1621");
@@ -31,6 +46,24 @@ const Verification = () => {
   }, [isDark]);
 
   const router = useRouter();
+  const [errorMessages, setErrorMessages] = useState<string[]>();
+  const onChangeCode = (text: string, index: number) => {
+    if (text.length > 1) {
+      setErrorMessages(undefined);
+      const newCodes = text.split("");
+      setCodes(newCodes);
+      refs[5]!.current?.focus();
+      return;
+    }
+    setErrorMessages(undefined);
+    const newCodes = [...codes!];
+    newCodes[index] = text;
+    setCodes(newCodes);
+    if (text !== "" && index < 5) {
+      refs[index + 1]!.current?.focus();
+    }
+  };
+
   return (
     <SafeAreaView style={{ backgroundColor: defaultColor, flex: 1 }}>
       <View style={{ padding: 24, justifyContent: "center", marginTop: 160 }}>
@@ -50,21 +83,35 @@ const Verification = () => {
             justifyContent: "space-around",
           }}
         >
-          {[...Array(4)].map((_, index) => (
-            <TextInput
-              key={index}
-              keyboardType="numeric"
-              style={{
-                width: 64,
-                height: 80,
-                borderRadius: 16,
-                textAlign: "center",
-                backgroundColor: inputBgColor,
-                color: defaultTextColor,
-                fontSize: 24,
+          {isDark ? (
+            <OTPInput
+              codes={codes!}
+              errorMessages={errorMessages}
+              onChangeCode={onChangeCode}
+              refs={refs}
+              config={{
+                backgroundColor: "#434345",
+                textColor: "white",
+                borderColor: "#0f1621",
+                errorColor: "red",
+                focusColor: "#6759FF",
               }}
             />
-          ))}
+          ) : (
+            <OTPInput
+              codes={codes!}
+              errorMessages={errorMessages}
+              onChangeCode={onChangeCode}
+              refs={refs}
+              config={{
+                backgroundColor: "#EFEFEF",
+                textColor: "black",
+                borderColor: "#ffffff",
+                errorColor: "red",
+                focusColor: "black",
+              }}
+            />
+          )}
         </View>
         {/** Button */}
         <TouchableOpacity

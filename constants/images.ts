@@ -6,6 +6,7 @@ import stripe2 from "@/assets/images/Subtract2.png";
 import stripe3 from "@/assets/images/Subtract3.png";
 import stripe4 from "@/assets/images/Subtract4.png";
 import logo from "@/assets/images/Logo.png";
+import googleLogo from "@/assets/images/google.png";
 
 export default {
   onboarding1,
@@ -16,4 +17,5 @@ export default {
   stripe3,
   stripe4,
   logo,
+  googleLogo,
 };
