@@ -115,9 +115,17 @@ const Signup = () => {
                 backgroundColor: inputBackgroundColor,
                 padding: 12,
                 borderRadius: 16,
+                position: "relative",
               }}
             >
-              <Text style={{ flex: 0.1, color: defaultTextColor }}>
+              <Text
+                style={{
+                  zIndex: 10,
+                  position: "absolute",
+                  color: defaultTextColor,
+                  left: 14,
+                }}
+              >
                 {title}
               </Text>
               <Picker
@@ -125,9 +133,10 @@ const Signup = () => {
                 onValueChange={(itemValue) => setTitle(itemValue)}
                 style={{
                   backgroundColor: inputBackgroundColor,
-                  flex: 0.1,
-                  color: defaultTextColor,
+                  flex: 0.2,
+                  color: inputBackgroundColor,
                 }}
+                dropdownIconColor={isDark ? "#ffffff" : "#000000"}
               >
                 <Picker.Item label="Mr." value="Mr." />
                 <Picker.Item label="Ms." value="Ms." />
@@ -136,9 +145,7 @@ const Signup = () => {
               <TextInput
                 placeholderTextColor={"#D1D3D4"}
                 style={{
-                  flex: 1,
-                  marginLeft: 8,
-                  paddingHorizontal: 12,
+                  paddingHorizontal: 8,
                   paddingVertical: 8,
                   color: defaultTextColor,
                 }}
