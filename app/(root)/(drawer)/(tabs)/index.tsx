@@ -15,6 +15,7 @@ import Category from "@/component/Category";
 import Offer from "@/component/Offer";
 import ApplianceRepair from "@/component/ApplianceRepair";
 import { useRouter } from "expo-router";
+import CustomTitle from "@/component/CustomTitle";
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -123,34 +124,8 @@ export default function HomeScreen() {
           : "bg-[#ffffff] rounded-xl w-[91%] mx-auto py-8 px-5 mt-6"
       }
     >
-      <View className="flex-row justify-between items-center">
-        <View className="flex-row items-center">
-          <View
-            style={{
-              width: 4,
-              height: 20,
-              backgroundColor: "#CABDFF",
-              marginRight: 10,
-              borderRadius: 20,
-            }}
-          />
-          <Text
-            style={{
-              fontSize: 18,
-              fontWeight: "bold",
-              color: defaultTextColor,
-            }}
-          >
-            {item.title}
-          </Text>
-        </View>
-        <TouchableOpacity className="flex-row items-center gap-1 border border-[#EFEFEF] py-3 px-5 rounded-full">
-          <Text className={isDark ? "text-[#ffffff]" : "text-[#6F767E]"}>
-            See All
-          </Text>
-          <AntDesign name="right" size={13} color="black" />
-        </TouchableOpacity>
-      </View>
+      {/**custom body component header */}
+      <CustomTitle title="Cleaning Services" showButton />
       <Category />
     </View>
   );
