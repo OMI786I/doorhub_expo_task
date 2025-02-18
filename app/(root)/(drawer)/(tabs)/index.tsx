@@ -5,6 +5,7 @@ import images from "@/constants/images";
 import Search from "@/component/Search";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Category from "@/component/Category";
+import Offer from "@/component/Offer";
 
 export default function HomeScreen() {
   const [defaultColor, setDefaultColor] = useState("#f9f9f9");
@@ -85,6 +86,8 @@ export default function HomeScreen() {
         </View>
         <Category />
       </View>
+      {/**Offers */}
+      <Offer />
     </ScrollView>
   );
 }

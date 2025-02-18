@@ -39,20 +39,25 @@ const Category = () => {
 
   return (
     <FlatList
-      contentContainerClassName="gap-2 "
       horizontal
       style={{
         marginTop: 10,
+      }}
+      contentContainerStyle={{
+        gap: 16,
       }}
       showsHorizontalScrollIndicator={false}
       keyExtractor={(item) => item.title}
       data={categoryData}
       renderItem={({ item }) => (
-        <TouchableOpacity>
-          <View>
-            <Image className="w-44 h-44 rounded-xl" source={item.image} />
-            <Text className="font-bold text-center">{item.title}</Text>
-          </View>
+        <TouchableOpacity className="w-44 gap-3">
+          <Image
+            className="w-full h-52 rounded-xl  "
+            source={item.image}
+            resizeMode="cover"
+          />
+
+          <Text className="font-bold text-center">{item.title}</Text>
         </TouchableOpacity>
       )}
     />
