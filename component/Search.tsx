@@ -37,7 +37,6 @@ const Search = () => {
         onChangeText={setSearch}
       />
       <TouchableOpacity className="bg-[#6759ff] p-2  rounded-lg mr-2">
-        {" "}
         <Octicons name="search" size={24} color="white" />
       </TouchableOpacity>
     </View>

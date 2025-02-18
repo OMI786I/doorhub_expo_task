@@ -11,6 +11,9 @@ import category1 from "@/assets/images/category1.png";
 import category2 from "@/assets/images/catogory2.png";
 import category3 from "@/assets/images/category3.png";
 import seeAll from "@/assets/images/seeAll.png";
+import cleaning1 from "@/assets/images/cleaning_services_1.png";
+import cleaning2 from "@/assets/images/cleaning_services_2.png";
+import cleaning3 from "@/assets/images/cleaning_services_3.jpg";
 
 export default {
   onboarding1,
@@ -26,4 +29,7 @@ export default {
   category2,
   category3,
   seeAll,
+  cleaning1,
+  cleaning2,
+  cleaning3,
 };
