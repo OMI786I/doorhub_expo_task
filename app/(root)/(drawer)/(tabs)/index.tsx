@@ -14,8 +14,10 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import Category from "@/component/Category";
 import Offer from "@/component/Offer";
 import ApplianceRepair from "@/component/ApplianceRepair";
+import { useRouter } from "expo-router";
 
 export default function HomeScreen() {
+  const router = useRouter();
   const [defaultColor, setDefaultColor] = useState("#f9f9f9");
   const [defaultTextColor, setDefaultTextColor] = useState("#000000");
   const { isDark } = useContext(ThemeContext);
@@ -78,7 +80,9 @@ export default function HomeScreen() {
           <TouchableOpacity>
             <Image source={images.category3} />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => router.push("/(root)/pages/allCategories")}
+          >
             <Image source={images.seeAll} />
           </TouchableOpacity>
         </View>
