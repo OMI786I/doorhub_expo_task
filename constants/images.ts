@@ -7,6 +7,10 @@ import stripe3 from "@/assets/images/Subtract3.png";
 import stripe4 from "@/assets/images/Subtract4.png";
 import logo from "@/assets/images/Logo.png";
 import googleLogo from "@/assets/images/google.png";
+import category1 from "@/assets/images/category1.png";
+import category2 from "@/assets/images/catogory2.png";
+import category3 from "@/assets/images/category3.png";
+import seeAll from "@/assets/images/seeAll.png";
 
 export default {
   onboarding1,
@@ -18,4 +22,8 @@ export default {
   stripe4,
   logo,
   googleLogo,
+  category1,
+  category2,
+  category3,
+  seeAll,
 };
