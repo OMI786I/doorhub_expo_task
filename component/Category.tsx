@@ -6,8 +6,9 @@ import {
   ImageSourcePropType,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import images from "@/constants/images";
+import { ThemeContext } from "@/app/Context/ThemeContext";
 const Category = () => {
   interface Data {
     title: string;
@@ -36,7 +37,7 @@ const Category = () => {
       offerValue: 10,
     },
   ];
-
+  const { isDark } = useContext(ThemeContext);
   return (
     <FlatList
       horizontal
@@ -57,7 +58,15 @@ const Category = () => {
             resizeMode="cover"
           />
 
-          <Text className="font-bold text-center">{item.title}</Text>
+          <Text
+            className={
+              isDark
+                ? "font-bold text-center text-white"
+                : "font-bold text-center"
+            }
+          >
+            {item.title}
+          </Text>
         </TouchableOpacity>
       )}
     />

@@ -14,6 +14,7 @@ import seeAll from "@/assets/images/seeAll.png";
 import cleaning1 from "@/assets/images/cleaning_services_1.png";
 import cleaning2 from "@/assets/images/cleaning_services_2.png";
 import cleaning3 from "@/assets/images/cleaning_services_3.jpg";
+import washingMachine from "@/assets/images/washing_machine.png";
 
 export default {
   onboarding1,
@@ -32,4 +33,5 @@ export default {
   cleaning1,
   cleaning2,
   cleaning3,
+  washingMachine,
 };

@@ -20,22 +20,49 @@ const Search = () => {
   }, [isDark]);
 
   return (
-    <View className="flex-row items-center bg-[#fbfbfb] rounded-xl w-[100%] mx-auto py-3 px-1 gap-2 ">
-      <TextInput
-        placeholderTextColor={"#D1D3D4"}
-        style={{
-          flex: 1,
-          marginLeft: 8,
-          paddingHorizontal: 12,
-          paddingVertical: 8,
-          color: defaultTextColor,
-          backgroundColor: "#fbfbfb", // Light gray background
-          borderRadius: 8, // Rounded
-          height: 40,
-        }}
-        placeholder="Search what you need"
-        onChangeText={setSearch}
-      />
+    <View
+      className={
+        isDark
+          ? "flex-row items-center bg-[#1a2332] rounded-xl w-[100%] mx-auto py-3 px-1 gap-2 "
+          : "flex-row items-center bg-[#fbfbfb] rounded-xl w-[100%] mx-auto py-3 px-1 gap-2 "
+      }
+    >
+      {isDark ? (
+        <TextInput
+          placeholderTextColor={"#D1D3D4"}
+          style={{
+            flex: 1,
+            marginLeft: 8,
+            paddingHorizontal: 12,
+            paddingVertical: 8,
+            color: defaultTextColor,
+
+            backgroundColor: "#1a2332", // Light gray background
+            borderRadius: 8, // Rounded
+            height: 40,
+          }}
+          placeholder="Search what you need"
+          onChangeText={setSearch}
+        />
+      ) : (
+        <TextInput
+          placeholderTextColor={"#D1D3D4"}
+          style={{
+            flex: 1,
+            marginLeft: 8,
+            paddingHorizontal: 12,
+            paddingVertical: 8,
+            color: defaultTextColor,
+
+            backgroundColor: "#fbfbfb", // Light gray background
+            borderRadius: 8, // Rounded
+            height: 40,
+          }}
+          placeholder="Search what you need"
+          onChangeText={setSearch}
+        />
+      )}
+
       <TouchableOpacity className="bg-[#6759ff] p-2  rounded-lg mr-2">
         <Octicons name="search" size={24} color="white" />
       </TouchableOpacity>
