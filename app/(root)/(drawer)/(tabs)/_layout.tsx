@@ -12,16 +12,19 @@ export default function AppLayout() {
   const [defaultTextColor, setDefaultTextColor] = useState("#000000"); // Default text color
   const [defaultNavTextColor, setDefaultNavTextColor] = useState("#18202e"); // Default text color
   const { isDark } = useContext(ThemeContext);
-
+  const [defaultNavBackgroundColor, setDefaultNavBackgroundColor] =
+    useState("white");
   useEffect(() => {
     if (isDark) {
       setDefaultColor("#0f1621"); // Dark theme background color
       setDefaultTextColor("#ffffff"); // Dark theme text color
       setDefaultNavTextColor("#18202e"); // Dark theme text color
+      setDefaultNavBackgroundColor("#18202e");
     } else {
       setDefaultColor("#f9f9f9"); // Light theme background color
       setDefaultTextColor("#000000"); // Light theme text color
       setDefaultNavTextColor("#f9f9f9"); // Light theme text color
+      setDefaultNavBackgroundColor("#ffffff");
     }
   }, [isDark]);
 
@@ -43,7 +46,7 @@ export default function AppLayout() {
         tabBarShowLabel: false,
         tabBarPosition: "top",
         tabBarStyle: {
-          backgroundColor: defaultNavTextColor,
+          backgroundColor: defaultNavBackgroundColor,
         },
       }}
     >
@@ -52,7 +55,7 @@ export default function AppLayout() {
         options={{
           // title: "Home",
           tabBarShowLabel: false,
-          headerTitle: () => <CustomHeader title="Home" />,
+          headerShown: false,
           headerStyle: {
             backgroundColor: defaultColor,
             shadowOpacity: 0,
