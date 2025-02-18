@@ -30,8 +30,8 @@ const UserProfile = () => {
         <View
           className={
             isDark
-              ? "items-center mt-8 bg-[#18202e] p-6 w-[90%] rounded-2xl mx-auto shadow-md flex-row"
-              : "items-center mt-8 bg-white p-6 w-[90%] rounded-2xl mx-auto shadow-md flex-row"
+              ? "items-center mt-8 bg-[#18202e] p-6 w-[90%] gap-3 rounded-2xl mx-auto shadow-md flex-row"
+              : "items-center mt-8 bg-white p-6 w-[90%] gap-3 rounded-2xl mx-auto shadow-md flex-row"
           }
         >
           <Image
