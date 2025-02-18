@@ -1,6 +1,13 @@
 import { ThemeContext } from "@/app/Context/ThemeContext";
 import { useContext, useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  FlatList,
+  SafeAreaView,
+} from "react-native";
 import images from "@/constants/images";
 import Search from "@/component/Search";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -9,23 +16,23 @@ import Offer from "@/component/Offer";
 
 export default function HomeScreen() {
   const [defaultColor, setDefaultColor] = useState("#f9f9f9");
-  const [defaultTextColor, setDefaultTextColor] = useState("#000000"); // Default text color
+  const [defaultTextColor, setDefaultTextColor] = useState("#000000");
   const { isDark } = useContext(ThemeContext);
+
   useEffect(() => {
     if (isDark) {
-      setDefaultColor("#0f1621"); // Dark theme background color
-      setDefaultTextColor("#ffffff"); // Dark theme text color
+      setDefaultColor("#0f1621");
+      setDefaultTextColor("#ffffff");
     } else {
-      setDefaultColor("#f9f9f9"); // Light theme background color
-      setDefaultTextColor("#000000"); // Light theme text color
+      setDefaultColor("#f9f9f9");
+      setDefaultTextColor("#000000");
     }
   }, [isDark]);
 
-  return (
-    <ScrollView
-      className={isDark ? "bg-[#0f1621] flex-1" : "bg-[#f9f9f9] flex-1 "}
-    >
-      {/**top part */}
+  // List Header Component (Greeting & Category Section)
+  const renderHeader = () => (
+    <View>
+      {/* Greeting & Search Bar */}
       <View className="bg-[#ffffff] rounded-xl w-[91%] mx-auto p-8 mt-6">
         <Text className="text-lg text-[#666c89]">HELLO OMI 👋</Text>
         <Text className="text-[#172b4d] text-4xl font-bold">
@@ -33,9 +40,9 @@ export default function HomeScreen() {
         </Text>
         <Search />
       </View>
-      {/**category */}
 
-      <View className="bg-[#ffffff] rounded-xl w-[91%] mx-auto p-8 mt-6 ">
+      {/* Category Section */}
+      <View className="bg-[#ffffff] rounded-xl w-[91%] mx-auto p-8 mt-6">
         <View className="flex-row justify-between">
           <TouchableOpacity>
             <Image source={images.category1} />
@@ -51,43 +58,64 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </View>
       </View>
-      {/**services:cleaning */}
+    </View>
+  );
 
-      <View className="bg-[#ffffff] rounded-xl w-[91%] mx-auto py-8 px-5 mt-6 ">
-        <View className="flex-col">
-          <View className=" flex-row justify-between">
-            <View className="flex-row items-center">
-              <View
-                style={{
-                  width: 4,
-                  height: 20,
-                  backgroundColor: "#CABDFF",
-                  marginRight: 10,
-                  borderRadius: 20,
-                }}
-              />
-              {/* Title */}
-              <Text
-                style={{
-                  fontSize: 18,
-                  fontWeight: "bold",
-                  color: defaultTextColor,
-                }}
-              >
-                Cleaning Services
-              </Text>
-            </View>
-
-            <TouchableOpacity className="flex-row items-center gap-1 border border-[#EFEFEF] py-3 px-5 rounded-full">
-              <Text className="text-[#6F767E]">See All</Text>
-              <AntDesign name="right" size={13} color="black" />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <Category />
-      </View>
-      {/**Offers */}
+  // List Footer Component (Offers)
+  const renderFooter = () => (
+    <View className="bg-[#ffffff] rounded-xl w-[91%] mx-auto py-8 px-5 mt-6 ">
       <Offer />
-    </ScrollView>
+    </View>
+  );
+
+  // Render Static Service Section
+  const renderService = ({ item }: { item: { id: string; title: string } }) => (
+    <View className="bg-[#ffffff] rounded-xl w-[91%] mx-auto py-8 px-5 mt-6">
+      <View className="flex-row justify-between items-center">
+        <View className="flex-row items-center">
+          <View
+            style={{
+              width: 4,
+              height: 20,
+              backgroundColor: "#CABDFF",
+              marginRight: 10,
+              borderRadius: 20,
+            }}
+          />
+          <Text
+            style={{
+              fontSize: 18,
+              fontWeight: "bold",
+              color: defaultTextColor,
+            }}
+          >
+            {item.title}
+          </Text>
+        </View>
+        <TouchableOpacity className="flex-row items-center gap-1 border border-[#EFEFEF] py-3 px-5 rounded-full">
+          <Text className="text-[#6F767E]">See All</Text>
+          <AntDesign name="right" size={13} color="black" />
+        </TouchableOpacity>
+      </View>
+      <Category />
+    </View>
+  );
+
+  // Static Data (Only One Entry)
+  const services = [{ id: "1", title: "Cleaning Services" }];
+
+  return (
+    <SafeAreaView
+      className={isDark ? "bg-[#0f1621] flex-1" : "bg-[#f9f9f9] flex-1"}
+    >
+      <FlatList
+        data={services}
+        keyExtractor={(item) => item.id}
+        renderItem={renderService}
+        ListHeaderComponent={renderHeader}
+        ListFooterComponent={renderFooter}
+        showsVerticalScrollIndicator={false}
+      />
+    </SafeAreaView>
   );
 }
