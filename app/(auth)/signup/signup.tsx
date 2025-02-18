@@ -13,6 +13,7 @@ import logo from "@/assets/images/logo_no_text.png";
 import { Picker } from "@react-native-picker/picker";
 import { useRouter } from "expo-router";
 import { ThemeContext } from "@/app/Context/ThemeContext";
+import Button from "@/component/Button";
 
 const Signup = () => {
   const [countryCode, setCountryCode] = useState<
@@ -254,27 +255,11 @@ const Signup = () => {
               />
             </View>
           </View>
-          <View>
-            <TouchableOpacity
-              style={{
-                padding: 20,
-                backgroundColor: buttonBackgroundColor,
-                marginTop: 24,
-                borderRadius: 16,
-              }}
-            >
-              <Text
-                style={{
-                  textAlign: "center",
-                  fontSize: 20,
-                  fontWeight: "bold",
-                  color: defaultTextColor,
-                }}
-              >
-                Sign Up
-              </Text>
-            </TouchableOpacity>
-          </View>
+          {/**sign up */}
+          <Button
+            title="Sign Up"
+            onPress={() => router.push("/(auth)/signin/sign-in")}
+          />
         </View>
 
         {/**bottom parts */}

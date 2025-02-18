@@ -15,6 +15,7 @@ import React, {
 import { useRouter } from "expo-router";
 import { ThemeContext } from "../Context/ThemeContext";
 import { OTPInput } from "@/component/OtpInput";
+import Button from "@/component/Button";
 
 const Verification = () => {
   const [defaultColor, setDefaultColor] = useState("#f9f9f9");
@@ -114,27 +115,10 @@ const Verification = () => {
           )}
         </View>
         {/** Button */}
-        <TouchableOpacity
-          style={{
-            marginTop: 64,
-            padding: 16,
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: buttonBgColor,
-            borderRadius: 16,
-          }}
-          onPress={() => router.push("/")}
-        >
-          <Text
-            style={{
-              fontSize: 18,
-              fontWeight: "bold",
-              color: defaultTextColor,
-            }}
-          >
-            Continue
-          </Text>
-        </TouchableOpacity>
+        <View className="mt-10">
+          <Button title="Continue" onPress={() => router.push("/")} />
+        </View>
+
         {/** Timer */}
         <View
           style={{

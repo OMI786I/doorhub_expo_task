@@ -16,6 +16,7 @@ import images from "@/constants/images";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { useRouter } from "expo-router";
 import { ThemeContext } from "@/app/Context/ThemeContext";
+import Button from "@/component/Button";
 const Signin = () => {
   const [countryCode, setCountryCode] = useState<CountryCode>("US");
   const [country, setCountry] = useState<{ [key: string]: string }>();
@@ -46,6 +47,10 @@ const Signin = () => {
       setDefaultTextColor("#000000"); // Light theme text color
     }
   }, [isDark]);
+
+  const handleSignin = () => {
+    router.push("/verification/verification");
+  };
 
   return (
     <SafeAreaView style={{ backgroundColor: defaultColor }}>
@@ -106,26 +111,8 @@ const Signin = () => {
               />
             </View>
           </View>
-          <View>
-            <TouchableOpacity
-              onPress={() => router.push("/verification/verification")}
-              className={
-                isDark
-                  ? "p-5 bg-[#2f3643] mt-6 rounded-2xl"
-                  : `p-5 bg-[#efefef] mt-6 rounded-2xl`
-              }
-            >
-              <Text
-                className={
-                  isDark
-                    ? `text-center text-xl font-bold text-white`
-                    : `text-center text-xl font-bold text-black`
-                }
-              >
-                Sign In
-              </Text>
-            </TouchableOpacity>
-          </View>
+          {/**button */}
+          <Button title="Sign in" onPress={handleSignin} />
         </View>
         {/**socials */}
         <View className="mt-14">
