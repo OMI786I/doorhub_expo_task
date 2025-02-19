@@ -15,7 +15,10 @@ import cleaning1 from "@/assets/images/cleaning_services_1.png";
 import cleaning2 from "@/assets/images/cleaning_services_2.png";
 import cleaning3 from "@/assets/images/cleaning_services_3.jpg";
 import washingMachine from "@/assets/images/washing_machine.png";
-
+import appliance_image_1 from "@/assets/images/appliance_image_1.png";
+import appliance_image_2 from "@/assets/images/appliance_image_2.png";
+import appliance_image_3 from "@/assets/images/appliance_image_3.png";
+import appliance_image_4 from "@/assets/images/appliance_image_4.png";
 export default {
   onboarding1,
   onboarding2,
@@ -34,4 +37,8 @@ export default {
   cleaning2,
   cleaning3,
   washingMachine,
+  appliance_image_1,
+  appliance_image_2,
+  appliance_image_3,
+  appliance_image_4,
 };

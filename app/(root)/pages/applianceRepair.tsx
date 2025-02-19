@@ -1,11 +1,54 @@
-import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  ImageSourcePropType,
+  FlatList,
+  Image,
+} from "react-native";
 import React, { useState } from "react";
 import CustomTitle from "@/component/CustomTitle";
 import { useRouter } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
 import Search from "@/component/Search";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import images from "@/constants/images";
+interface Data {
+  title: string;
+  rating: number;
+  money: number;
+  image: ImageSourcePropType;
+}
+
 const applianceRepair = () => {
+  const data: Data[] = [
+    {
+      title: "AC check up",
+      rating: 4.8,
+      money: 128,
+      image: images.appliance_image_1,
+    },
+    {
+      title: "AC regular service",
+      rating: 4.5,
+      money: 128,
+      image: images.appliance_image_2,
+    },
+    {
+      title: "AC installation",
+      rating: 4.5,
+      money: 170,
+      image: images.appliance_image_3,
+    },
+    {
+      title: "AC uninstallation",
+      rating: 4.5,
+      money: 170,
+      image: images.appliance_image_4,
+    },
+  ];
+
   const [activeFilterGrid, setActiveFilterGrid] = useState<boolean>(false);
   const [activeFilterList, setActiveFilterList] = useState<boolean>(true);
 
@@ -66,7 +109,38 @@ const applianceRepair = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <View className="mt-5 "></View>
+          <View className="mt-5 p-4 ">
+            <FlatList
+              data={data}
+              contentContainerStyle={{
+                gap: 25,
+              }}
+              keyExtractor={(item) => item.title}
+              renderItem={({ item }) => (
+                <View className="flex-row items-center gap-6">
+                  <View>
+                    <Image source={item.image} />
+                  </View>
+                  <View>
+                    <View className="flex-row items-center gap-1">
+                      <AntDesign name="star" size={14} color={"#FFC554"} />
+                      <Text className="font-bold">{item.rating}</Text>
+                      <Text className="text-gray-500">(87)</Text>
+                    </View>
+                    <View>
+                      <Text className="font-bold">{item.title}</Text>
+                      <Text className="text-[#9A9FA5]  my-2">Starts From</Text>
+                      <TouchableOpacity className="p-1  bg-[#B5E4CA] w-[50%]">
+                        <Text className="font-bold text-center">
+                          ${item.money}
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>
+              )}
+            />
+          </View>
         </View>
       </View>
     </SafeAreaView>
