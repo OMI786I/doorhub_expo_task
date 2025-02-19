@@ -59,7 +59,7 @@ const applianceRepair = () => {
   console.log(activeFilterGrid, activeFilterList);
 
   return (
-    <SafeAreaView className="">
+    <SafeAreaView className="flex-1">
       {/**search bar header */}
       <View className="bg-white p-4 w-full">
         <View className="  w-[100%]   mx-auto flex-row justify-center items-center bg-[#fbfbfb] rounded-xl">
@@ -74,8 +74,8 @@ const applianceRepair = () => {
       </View>
 
       {/**body */}
-      <View className="p-4 ">
-        <View className="bg-white min-h-[85%] rounded-xl">
+      <View className="p-4 flex-1 ">
+        <View className="bg-white min-h-[85%] rounded-xl flex-1">
           <View className="mt-6 p-4 rounded-xl flex-row justify-between  ">
             <CustomTitle title="Appliance Repair" showButton={false} />
             <View className="flex-row gap-3">
@@ -115,6 +115,7 @@ const applianceRepair = () => {
               contentContainerStyle={{
                 gap: 25,
               }}
+              showsVerticalScrollIndicator={false}
               keyExtractor={(item) => item.title}
               renderItem={({ item }) => (
                 <View className="flex-row items-center gap-6">
