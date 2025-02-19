@@ -3,11 +3,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "@/app/Context/ThemeContext";
 import images from "@/constants/images";
 import { AntDesign } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 const ApplianceRepair = () => {
   const { isDark } = useContext(ThemeContext);
 
   const [textColor, setTextColor] = useState("#ffffff");
-
+  const router = useRouter();
   useEffect(() => {
     if (isDark) {
       setTextColor("#ffffff");
@@ -63,6 +64,7 @@ const ApplianceRepair = () => {
 
             {/* Grab Offer Button */}
             <TouchableOpacity
+              onPress={() => router.push("/(root)/pages/applianceRepair")}
               className={
                 "flex-row items-center px-1 bg-[#ffffff] justify-center py-2 border border-[#A492EB] w-44 rounded-full mt-6"
               }

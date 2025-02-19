@@ -103,6 +103,7 @@ export default function HomeScreen() {
       >
         <Offer />
       </View>
+
       <View
         className={
           isDark
