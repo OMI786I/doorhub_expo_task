@@ -10,11 +10,17 @@ import React, { useEffect, useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { data, Data } from "@/constants/data";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { goBack } from "expo-router/build/global-state/routing";
+import Feather from "@expo/vector-icons/Feather";
+import { CustomHeader } from "@/component/CustomHeader";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import Entypo from "@expo/vector-icons/Entypo";
 const DetailsPage: React.FC = () => {
   const router = useRouter();
   const { id } = useLocalSearchParams();
   const [detailsData, setDetailsData] = useState<Data | null>(null);
+  const [selectHome, setSelectHome] = useState<boolean>(false);
+  const [selectOffice, setSelectOffice] = useState<boolean>(false);
+  const [selectVila, setSelectVila] = useState<boolean>(false);
 
   useEffect(() => {
     if (id) {
@@ -27,7 +33,7 @@ const DetailsPage: React.FC = () => {
     return <Text>Loading...</Text>;
   } else
     return (
-      <SafeAreaView>
+      <SafeAreaView className="bg-[#f9f9f9]">
         <ScrollView>
           {/**top image */}
           <View className="relative">
@@ -51,6 +57,62 @@ const DetailsPage: React.FC = () => {
                 <Text className="font-bold text-5xl text-white">
                   AC Regular Service
                 </Text>
+              </View>
+            </View>
+          </View>
+          <View className="bg-white -mt-10 w-[90%] mx-auto p-4 rounded-xl">
+            <CustomHeader title="Type of Property" />
+            <View className="flex-row justify-around  mt-6">
+              <View>
+                <TouchableOpacity
+                  onPress={() => setSelectHome(!selectHome)}
+                  className={
+                    selectHome
+                      ? "p-5 border border-[#6759ff] bg-[#6759ff] rounded-2xl"
+                      : "p-5 border border-[#D1D3D4] rounded-2xl"
+                  }
+                >
+                  <Feather
+                    name="home"
+                    size={34}
+                    color={selectHome ? "#ffffff" : "#D1D3D4"}
+                  />
+                </TouchableOpacity>
+                <Text className="text-center mt-1">Home</Text>
+              </View>
+              <View>
+                <TouchableOpacity
+                  onPress={() => setSelectOffice(!selectOffice)}
+                  className={
+                    selectOffice
+                      ? "p-5 border border-[#6759ff] bg-[#6759ff] rounded-2xl"
+                      : "p-5 border border-[#D1D3D4] rounded-2xl"
+                  }
+                >
+                  <FontAwesome5
+                    name="building"
+                    size={34}
+                    color={selectOffice ? "#ffffff" : "#D1D3D4"}
+                  />
+                </TouchableOpacity>
+                <Text className="text-center mt-1">Office</Text>
+              </View>
+              <View>
+                <TouchableOpacity
+                  onPress={() => setSelectVila(!selectVila)}
+                  className={
+                    selectVila
+                      ? "p-5 border border-[#6759ff] bg-[#6759ff] rounded-2xl"
+                      : "p-5 border border-[#D1D3D4] rounded-2xl"
+                  }
+                >
+                  <Entypo
+                    name="shop"
+                    size={34}
+                    color={selectVila ? "#ffffff" : "#D1D3D4"}
+                  />
+                </TouchableOpacity>
+                <Text className="text-center mt-1">Vila</Text>
               </View>
             </View>
           </View>
