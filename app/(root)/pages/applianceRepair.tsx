@@ -53,9 +53,7 @@ const applianceRepair = () => {
   const [activeFilterList, setActiveFilterList] = useState<boolean>(true);
 
   const router = useRouter();
-  if (!MaterialIcons) {
-    return <Text>Loading...</Text>;
-  }
+
   console.log(activeFilterGrid, activeFilterList);
 
   return (
@@ -101,8 +99,8 @@ const applianceRepair = () => {
                 }
                 onPress={() => setActiveFilterGrid(!activeFilterGrid)}
               >
-                <MaterialIcons
-                  name="grid-on"
+                <AntDesign
+                  name="table"
                   size={24}
                   color={activeFilterGrid ? "#6759ff" : "#9A9FA5"}
                 />

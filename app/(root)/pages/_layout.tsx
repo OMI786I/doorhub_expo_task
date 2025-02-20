@@ -24,7 +24,8 @@ export default function RootLayout() {
       <Stack.Screen
         name="applianceRepair"
         options={{
-          title: "Appliance Repair",
+          title: "",
+          headerShadowVisible: false,
         }}
       />
     </Stack>
