@@ -5,6 +5,8 @@ import {
   Image,
   SafeAreaView,
   TouchableOpacity,
+  TouchableHighlight,
+  ColorValue,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -21,6 +23,8 @@ const DetailsPage: React.FC = () => {
   const [selectHome, setSelectHome] = useState<boolean>(false);
   const [selectOffice, setSelectOffice] = useState<boolean>(false);
   const [selectVila, setSelectVila] = useState<boolean>(false);
+  const [numberUnits, setNumberUnits] = useState<number>(0);
+  const [bedRooms, setBedRooms] = useState<number>(0);
 
   useEffect(() => {
     if (id) {
@@ -60,6 +64,7 @@ const DetailsPage: React.FC = () => {
               </View>
             </View>
           </View>
+          {/**type of property */}
           <View className="bg-white -mt-10 w-[90%] mx-auto p-4 rounded-xl">
             <CustomHeader title="Type of Property" />
             <View className="flex-row justify-around  mt-6">
@@ -113,6 +118,62 @@ const DetailsPage: React.FC = () => {
                   />
                 </TouchableOpacity>
                 <Text className="text-center mt-1">Vila</Text>
+              </View>
+            </View>
+          </View>
+          {/**number of units and bedrooms */}
+
+          <View className="bg-white mt-5 w-[90%] mx-auto p-4 rounded-xl">
+            <View className="flex-row justify-between">
+              <Text className="text-lg">Number of Units</Text>
+              <View className="flex-row items-center gap-3">
+                <TouchableHighlight
+                  activeOpacity={0.6}
+                  underlayColor={"#6759ff"}
+                  onPress={() =>
+                    setNumberUnits((prev) => (prev > 0 ? prev - 1 : 0))
+                  }
+                  className="p-2 border border-[#D1D3D4] rounded-2xl"
+                >
+                  <AntDesign name="minus" size={18} color="black" />
+                </TouchableHighlight>
+                <Text>{Number(numberUnits)}</Text>
+                <TouchableHighlight
+                  activeOpacity={0.6}
+                  underlayColor={"#6759ff"}
+                  onPress={() =>
+                    setNumberUnits((prev) => (prev < 50 ? prev + 1 : 50))
+                  }
+                  className="p-2 border border-[#D1D3D4] rounded-2xl"
+                >
+                  <AntDesign name="plus" size={18} color="black" />
+                </TouchableHighlight>
+              </View>
+            </View>
+            <View className="flex-row justify-between border-t-[0.2px] mt-4 py-4">
+              <Text className="text-lg">Number of Bedrooms</Text>
+              <View className="flex-row items-center gap-3">
+                <TouchableHighlight
+                  activeOpacity={0.6}
+                  underlayColor={"#6759ff"}
+                  onPress={() =>
+                    setBedRooms((prev) => (prev > 0 ? prev - 1 : 0))
+                  }
+                  className="p-2 border border-[#D1D3D4] rounded-2xl"
+                >
+                  <AntDesign name="minus" size={18} color="black" />
+                </TouchableHighlight>
+                <Text>{Number(bedRooms)}</Text>
+                <TouchableHighlight
+                  activeOpacity={0.6}
+                  underlayColor={"#6759ff"}
+                  onPress={() =>
+                    setBedRooms((prev) => (prev < 50 ? prev + 1 : 50))
+                  }
+                  className="p-2 border border-[#D1D3D4] rounded-2xl"
+                >
+                  <AntDesign name="plus" size={18} color="black" />
+                </TouchableHighlight>
               </View>
             </View>
           </View>
