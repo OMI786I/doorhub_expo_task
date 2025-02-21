@@ -132,6 +132,7 @@ const bookings = () => {
         <View className=" flex-col gap-2 p-4 flex-1 w-[96%] mx-auto mt-2 rounded-xl">
           <FlatList
             data={services}
+            showsVerticalScrollIndicator={false}
             contentContainerStyle={{
               gap: 20,
             }}

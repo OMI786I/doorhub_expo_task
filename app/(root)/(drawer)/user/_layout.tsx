@@ -48,7 +48,7 @@ export default function Layout() {
       <Stack.Screen
         name="user"
         options={{
-          headerShown: true,
+          headerShown: false,
           headerBackVisible: true,
         }}
       />

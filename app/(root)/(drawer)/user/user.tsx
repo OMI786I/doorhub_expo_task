@@ -5,14 +5,16 @@ import {
   SafeAreaView,
   ScrollView,
   Image,
-  TouchableOpacity,
   TextInput,
+  TouchableOpacity,
 } from "react-native";
 import { CustomHeader } from "@/component/CustomHeader";
-import { AntDesign } from "@expo/vector-icons";
 import { ThemeContext } from "@/app/Context/ThemeContext";
+import { AntDesign } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 const UserProfile = () => {
+  const router = useRouter();
   const { isDark } = useContext(ThemeContext);
   const header = CustomHeader({
     title: "Profile",
@@ -23,6 +25,9 @@ const UserProfile = () => {
     <SafeAreaView
       className={isDark ? "bg-[#0f1621] flex-1" : "bg-[#f9f9f9] flex-1"}
     >
+      <TouchableOpacity onPress={() => router.back()} className="p-4 bg-white">
+        <AntDesign name="left" size={24} />
+      </TouchableOpacity>
       <ScrollView className="flex-1">
         <View>{header}</View>
 

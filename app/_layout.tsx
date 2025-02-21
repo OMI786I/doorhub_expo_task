@@ -17,6 +17,7 @@ export default function RootLayout() {
           <Stack.Screen name="(auth)" options={{}} />
           <Stack.Screen name="onboarding" options={{}} />
           <Stack.Screen name="verification" options={{}} />
+          <Stack.Screen name="friend_page" options={{}} />
         </Stack>
       </ThemeProvider>
     </Provider>

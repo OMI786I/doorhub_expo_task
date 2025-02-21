@@ -7,15 +7,16 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import Feather from "@expo/vector-icons/Feather";
 
-import { useRouter } from "expo-router";
+import { Href, useRouter } from "expo-router";
 import { ThemeContext } from "@/app/Context/ThemeContext";
 
 interface MenuItem {
   id: string;
   title: string;
   icons: ReactNode;
-  link: string;
+  link: `/${string}`;
 }
+
 const data: MenuItem[] = [
   {
     id: "1",
@@ -58,7 +59,7 @@ const data: MenuItem[] = [
     id: "7",
     title: "Refer a friend",
     icons: <Feather name="users" size={24} color="white" />,
-    link: "/",
+    link: "/(root)/friend_page/refer",
   },
   {
     id: "8",
@@ -175,7 +176,10 @@ export const DrawerContent = ({ navigation }: any) => {
           renderItem={({ item }) => {
             return (
               <View className=" my-2 ">
-                <TouchableOpacity className="flex-row gap-2">
+                <TouchableOpacity
+                  onPress={() => router.push(item.link as Href)}
+                  className="flex-row gap-2"
+                >
                   {item.icons}
                   <Text className="text-white"> {item.title}</Text>
                 </TouchableOpacity>

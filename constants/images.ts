@@ -20,6 +20,7 @@ import appliance_image_2 from "@/assets/images/appliance_image_2.png";
 import appliance_image_3 from "@/assets/images/appliance_image_3.png";
 import appliance_image_4 from "@/assets/images/appliance_image_4.png";
 import emptyBookings from "@/assets/images/empty_bookings.png";
+import referImage from "@/assets/images/refer.png";
 export default {
   onboarding1,
   onboarding2,
@@ -43,4 +44,5 @@ export default {
   appliance_image_3,
   appliance_image_4,
   emptyBookings,
+  referImage,
 };
