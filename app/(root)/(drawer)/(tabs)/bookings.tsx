@@ -129,12 +129,15 @@ const bookings = () => {
           </View>
         </View>
       ) : (
-        <View className="bg-white flex-col gap-2 p-4 w-[90%] mx-auto mt-2 rounded-xl">
+        <View className=" flex-col gap-2 p-4 flex-1 w-[96%] mx-auto mt-2 rounded-xl">
           <FlatList
             data={services}
+            contentContainerStyle={{
+              gap: 20,
+            }}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <View>
+              <View className="bg-white rounded-xl p-4">
                 <View className="flex-row items-center gap-6">
                   <Image source={item.icons} />
                   <View>
