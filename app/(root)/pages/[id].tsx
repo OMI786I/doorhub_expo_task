@@ -40,9 +40,9 @@ const DetailsPage: React.FC = () => {
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedTime, setSelectedTime] = useState<Date | null>(null);
 
-  const [selectedTime, setSelectedTime] = useState(new Date());
   const showDatePicker = () => setDatePickerVisibility(true);
   const hideDatePicker = () => setDatePickerVisibility(false);
 
@@ -54,9 +54,17 @@ const DetailsPage: React.FC = () => {
     hideDatePicker();
   };
   const handleTimeConfirm = (time: Date) => {
+    if (selectedDate) {
+      const combinedDate = new Date(selectedDate);
+      combinedDate.setHours(time.getHours());
+      combinedDate.setMinutes(time.getMinutes());
+      setSelectedDate(combinedDate);
+    }
     setSelectedTime(time);
     hideTimePicker();
   };
+
+  console.log("Selected Date and Time: ", selectedDate);
   if (!detailsData) {
     return <Text>Loading...</Text>;
   } else {
@@ -249,7 +257,7 @@ const DetailsPage: React.FC = () => {
                 <View className="items-start mt-9">
                   <TouchableOpacity
                     onPress={showDatePicker}
-                    className="bg-[#ffbc99] p-4 rounded-2xl"
+                    className="bg-[#ffbc99] p-4 rounded-2xl w-full"
                   >
                     <View className="flex-row gap-5 items-center">
                       <View>
@@ -293,7 +301,8 @@ const DetailsPage: React.FC = () => {
                         <Text className="text-gray-500">TIME</Text>
                         {selectedDate ? (
                           <Text className="mt-2 text-lg">
-                            Selected Time: {selectedTime.toTimeString()}
+                            Selected Time:
+                            {selectedTime ? selectedTime.toTimeString() : ""}
                           </Text>
                         ) : (
                           <Text className="mt-2 text-lg">Select your Time</Text>
