@@ -23,6 +23,24 @@ interface Booking {
   icons: ImageSourcePropType;
 }
 
+const formatDate = (time: Date | string | null) => {
+  if (!time) return "No date available"; // Handle null cases
+
+  // Convert string to Date if necessary
+  const dateObj = typeof time === "string" ? new Date(time) : time;
+
+  if (isNaN(dateObj.getTime())) return "Invalid date"; // Handle invalid dates
+
+  // Format the date and time
+  return `${dateObj.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  })}, ${dateObj.toLocaleDateString([], {
+    day: "2-digit",
+    month: "short",
+  })}`;
+};
+
 const bookings = () => {
   const [defaultColor, setDefaultColor] = useState("#f9f9f9");
   const [defaultTextColor, setDefaultTextColor] = useState("#000000"); // Default text color
@@ -138,7 +156,7 @@ const bookings = () => {
                     <AntDesign name="calendar" size={30} />
                     <View>
                       <Text className="font-bold text-lg">
-                        8:00-9:00 AM , 09 Dec
+                        {formatDate(item.time)}
                       </Text>
                       <Text className="text-[#6F767E]">Schedule</Text>
                     </View>
