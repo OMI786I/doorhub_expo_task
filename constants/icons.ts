@@ -7,6 +7,7 @@ import icon6 from "@/assets/icon/Painting.png";
 import icon7 from "@/assets/icon/Plumbing.png";
 import icon8 from "@/assets/icon/Shifting.png";
 import icon9 from "@/assets/icon/Cleaning.png";
+import logo from "@/assets/images/logo_no_text.png";
 export default {
   icon1,
   icon2,
@@ -17,4 +18,5 @@ export default {
   icon7,
   icon8,
   icon9,
+  logo,
 };

@@ -5,12 +5,22 @@ import {
   SafeAreaView,
   Image,
 } from "react-native";
-import React from "react";
+import { Rating } from "react-native-ratings";
+
+import Modal from "react-native-modal";
+import React, { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import images from "@/constants/images";
+import icons from "@/constants/icons";
+
 const refer = () => {
   const router = useRouter();
+  const [isModalVisible, setModalVisible] = useState<boolean>(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
   return (
     <SafeAreaView>
       <TouchableOpacity onPress={() => router.back()} className="p-4 bg-white">
@@ -32,9 +42,50 @@ const refer = () => {
           </Text>
         </View>
         <View className="justify-center items-center">
-          <TouchableOpacity className="bg-[#6759FF] p-4 w-[50%] px-11 rounded-xl mt-9">
+          <TouchableOpacity
+            onPress={toggleModal}
+            className="bg-[#6759FF] p-4 w-[50%] px-11 rounded-xl mt-9"
+          >
             <Text className="text-white text-center">Refer a friend</Text>
           </TouchableOpacity>
+          {/**Modal */}
+
+          <Modal className="bg-[#f9f9f9]" isVisible={isModalVisible}>
+            <View className="bg-white p-8 relative rounded-xl">
+              <TouchableOpacity
+                onPress={toggleModal}
+                className="p-2 border border-gray-200 bg-gray-200 rounded-full absolute right-2 top-2 "
+              >
+                <AntDesign name="close" />
+              </TouchableOpacity>
+
+              <View className="items-center">
+                <Image source={icons.logo} />
+                <Text className="font-bold text-xl mt-5 mb-3">
+                  Rate Door Hub App
+                </Text>
+                <Text className="text-center text-[#535763]">
+                  Your feedback will help us to make improvements
+                </Text>
+              </View>
+              <View className="mt-5 ">
+                <Rating
+                  type="star"
+                  ratingCount={5}
+                  imageSize={30}
+                  showRating={false}
+                />
+              </View>
+              <View className="flex-row justify-center gap-4 mt-10">
+                <TouchableOpacity className="p-4 border border-gray-300 rounded-xl">
+                  <Text>No Thanks</Text>
+                </TouchableOpacity>
+                <TouchableOpacity className="p-4 border border-gray-300 rounded-xl bg-[#6759FF]">
+                  <Text className="text-white">Rate on Play Store</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
         </View>
       </View>
     </SafeAreaView>
