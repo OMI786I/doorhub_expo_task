@@ -18,7 +18,17 @@ import { CustomHeader } from "@/component/CustomHeader";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Entypo from "@expo/vector-icons/Entypo";
 
+interface Booking {
+  type: string;
+  unitNumber: number;
+  bedroomsNumber: number;
+
+  time: Date | null;
+}
+
 const DetailsPage: React.FC = () => {
+  const [bookingData, setBookingData] = useState<Booking[]>([]);
+
   const router = useRouter();
   const { id } = useLocalSearchParams();
   const [detailsData, setDetailsData] = useState<Data | null>(null);
@@ -64,6 +74,31 @@ const DetailsPage: React.FC = () => {
     hideTimePicker();
   };
 
+  const handleBooking = () => {
+    if (!selectedDate || !selectedTime) {
+      alert("Please select date and time before booking.");
+      return;
+    }
+
+    const selectedType = selectHome
+      ? "Home"
+      : selectOffice
+      ? "Office"
+      : selectVila
+      ? "Vila"
+      : "None";
+
+    const newBooking: Booking = {
+      type: selectedType,
+      unitNumber: numberUnits,
+      bedroomsNumber: bedRooms,
+
+      time: selectedDate,
+    };
+
+    setBookingData([newBooking]);
+  };
+  console.log("Booking Data: ", bookingData);
   console.log("Selected Date and Time: ", selectedDate);
   if (!detailsData) {
     return <Text>Loading...</Text>;
@@ -102,7 +137,11 @@ const DetailsPage: React.FC = () => {
             <View className="flex-row justify-around mt-6">
               <View>
                 <TouchableOpacity
-                  onPress={() => setSelectHome(!selectHome)}
+                  onPress={() => {
+                    setSelectHome(true);
+                    setSelectOffice(false);
+                    setSelectVila(false);
+                  }}
                   className={`p-5 border ${
                     selectHome
                       ? "border-[#6759ff] bg-[#6759ff]"
@@ -119,7 +158,11 @@ const DetailsPage: React.FC = () => {
               </View>
               <View>
                 <TouchableOpacity
-                  onPress={() => setSelectOffice(!selectOffice)}
+                  onPress={() => {
+                    setSelectHome(false);
+                    setSelectOffice(true);
+                    setSelectVila(false);
+                  }}
                   className={`p-5 border ${
                     selectOffice
                       ? "border-[#6759ff] bg-[#6759ff]"
@@ -136,7 +179,11 @@ const DetailsPage: React.FC = () => {
               </View>
               <View>
                 <TouchableOpacity
-                  onPress={() => setSelectVila(!selectVila)}
+                  onPress={() => {
+                    setSelectHome(false);
+                    setSelectOffice(false);
+                    setSelectVila(true);
+                  }}
                   className={`p-5 border ${
                     selectVila
                       ? "border-[#6759ff] bg-[#6759ff]"
@@ -232,7 +279,9 @@ const DetailsPage: React.FC = () => {
                 <Text className="text-black">Save Draft</Text>
               </TouchableOpacity>
               <TouchableOpacity className="bg-[#6759ff] p-4 px-11 rounded-xl">
-                <Text className="text-white">Book Now</Text>
+                <Text onPress={handleBooking} className="text-white">
+                  Book Now
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -338,7 +387,10 @@ const DetailsPage: React.FC = () => {
                   <TouchableOpacity className="bg-[#fcfcfc] border border-gray-300 p-4 rounded-xl px-11">
                     <Text className="text-black">Save Draft</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity className="bg-[#6759ff] p-4 px-11 rounded-xl">
+                  <TouchableOpacity
+                    onPress={handleBooking}
+                    className="bg-[#6759ff] p-4 px-11 rounded-xl"
+                  >
                     <Text className="text-white">Book Now</Text>
                   </TouchableOpacity>
                 </View>
