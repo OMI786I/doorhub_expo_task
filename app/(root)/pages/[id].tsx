@@ -7,7 +7,9 @@ import {
   TouchableOpacity,
   TouchableHighlight,
   ColorValue,
+  StyleSheet,
 } from "react-native";
+import Modal from "react-native-modal";
 import React, { useEffect, useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { data, Data } from "@/constants/data";
@@ -16,6 +18,7 @@ import Feather from "@expo/vector-icons/Feather";
 import { CustomHeader } from "@/component/CustomHeader";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Entypo from "@expo/vector-icons/Entypo";
+import CustomTitle from "@/component/CustomTitle";
 const DetailsPage: React.FC = () => {
   const router = useRouter();
   const { id } = useLocalSearchParams();
@@ -32,6 +35,13 @@ const DetailsPage: React.FC = () => {
       setDetailsData(response);
     }
   }, [id]);
+
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
   console.log(detailsData);
   if (!detailsData) {
     return <Text>Loading...</Text>;
@@ -177,9 +187,108 @@ const DetailsPage: React.FC = () => {
               </View>
             </View>
           </View>
+          {/* Sticky Footer */}
+          <View style={styles.footer} className="flex-col gap-4 justify-center">
+            <View className="flex-row justify-between">
+              <View className="flex-row gap-2">
+                <Text className="text-gray-400">Total:</Text>
+                <Text className="font-bold">USD {detailsData.money}</Text>
+              </View>
+              <View>
+                <TouchableOpacity
+                  onPress={toggleModal}
+                  className="flex-row items-center gap-1"
+                >
+                  <Text className="text-orange-500">Bill Details</Text>
+                  <AntDesign name="up" color={"#f97316"} />
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View
+              className="
+            flex-row gap-4 justify-center"
+            >
+              <TouchableOpacity
+                className="bg-[#fcfcfc] border  border-gray-300"
+                style={styles.button}
+              >
+                <Text className="text-black">Save Draft</Text>
+              </TouchableOpacity>
+              <TouchableOpacity className="bg-[#6759ff]" style={styles.button}>
+                <Text className="text-white">Book Now</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          {/* Overlay Modal */}
+          <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
+            <View className="bg-white rounded-xl p-5">
+              {/**top part */}
+              <View className="flex-row justify-between ">
+                <View className="w-[80%]">
+                  <CustomHeader title="Select your Date & Time?" />
+                </View>
+
+                <TouchableOpacity
+                  onPress={toggleModal}
+                  className="p-2 border border-gray-200 bg-gray-200 rounded-full"
+                >
+                  <AntDesign name="close" />
+                </TouchableOpacity>
+              </View>
+              {/**middle part */}
+            </View>
+          </Modal>
         </ScrollView>
       </SafeAreaView>
     );
 };
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  content: {
+    flexGrow: 1,
+    padding: 20,
+  },
+  text: {
+    fontSize: 18,
+    marginBottom: 10,
+  },
+  footer: {
+    padding: 20,
+    backgroundColor: "#ffffff",
+    borderTopWidth: 1,
+    borderTopColor: "#ddd",
+  },
+  button: {
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    paddingHorizontal: 50,
+    marginTop: 10,
+  },
+
+  modalContent: {
+    backgroundColor: "#fff",
+    padding: 20,
+    borderRadius: 10,
+  },
+  modalText: {
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  closeButton: {
+    marginTop: 20,
+    backgroundColor: "#007bff",
+    padding: 10,
+    borderRadius: 5,
+    alignItems: "center",
+  },
+  closeButtonText: {
+    color: "#fff",
+    fontSize: 16,
+  },
+});
 
 export default DetailsPage;
