@@ -1,28 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ImageSourcePropType } from "react-native";
 
 interface Services {
   id: 1;
+  title: string;
   type: string;
   unitNumber: number;
   bedroomsNumber: number;
   description?: string;
   time: Date | string | null;
+  icons: ImageSourcePropType;
 }
 interface ServicesState {
   services: Services[];
 }
 
 const initialState: ServicesState = {
-  services: [
-    {
-      id: 1,
-      type: "Vila",
-      unitNumber: 3,
-      bedroomsNumber: 3,
-      description: "Testing",
-      time: "",
-    },
-  ],
+  services: [],
 };
 
 const serviceSlice = createSlice({

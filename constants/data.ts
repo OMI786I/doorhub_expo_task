@@ -1,11 +1,13 @@
 import { ImageSourcePropType } from "react-native";
 import images from "@/constants/images";
+import icons from "./icons";
 export interface Data {
   id: number;
   title: string;
   rating: number;
   money: number;
   image: ImageSourcePropType;
+  icons: ImageSourcePropType;
 }
 
 export const data: Data[] = [
@@ -15,6 +17,7 @@ export const data: Data[] = [
     rating: 4.8,
     money: 128,
     image: images.appliance_image_1,
+    icons: icons.icon1,
   },
   {
     id: 2,
@@ -22,6 +25,7 @@ export const data: Data[] = [
     rating: 4.5,
     money: 128,
     image: images.appliance_image_2,
+    icons: icons.icon5,
   },
   {
     id: 3,
@@ -29,6 +33,7 @@ export const data: Data[] = [
     rating: 4.5,
     money: 170,
     image: images.appliance_image_3,
+    icons: icons.icon3,
   },
   {
     id: 4,
@@ -36,5 +41,6 @@ export const data: Data[] = [
     rating: 4.5,
     money: 170,
     image: images.appliance_image_4,
+    icons: icons.icon4,
   },
 ];

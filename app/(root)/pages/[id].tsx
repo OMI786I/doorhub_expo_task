@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TouchableHighlight,
   TextInput,
+  ImageSourcePropType,
 } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Modal from "react-native-modal";
@@ -22,11 +23,13 @@ import { addServices } from "@/servicesSlice";
 import { useDispatch } from "react-redux";
 interface Booking {
   id: number;
+  title: string;
   type: string;
   unitNumber: number;
   bedroomsNumber: number;
   description?: string;
   time: Date | string;
+  icons: ImageSourcePropType;
 }
 
 const DetailsPage: React.FC = () => {
@@ -80,6 +83,11 @@ const DetailsPage: React.FC = () => {
   };
 
   const handleBooking = () => {
+    if (!detailsData) {
+      alert("Error: Missing property details.");
+      return;
+    }
+
     const selectedType = selectHome
       ? "Home"
       : selectOffice
@@ -115,17 +123,19 @@ const DetailsPage: React.FC = () => {
 
     const newBooking: Booking = {
       id: Number(id),
+      title: detailsData.title,
       type: selectedType,
       unitNumber: numberUnits,
       bedroomsNumber: bedRooms,
       time: selectedDate.toISOString(),
       description: description,
+      icons: detailsData.icons,
     };
 
     setBookingData([newBooking]);
     dispatch(addServices(newBooking));
   };
-
+  console.log(detailsData);
   useEffect(() => {
     if (bookingData.length > 0) {
       console.log("Booking Data: ", bookingData);
