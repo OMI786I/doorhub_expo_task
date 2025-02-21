@@ -6,9 +6,8 @@ import {
   SafeAreaView,
   TouchableOpacity,
   TouchableHighlight,
-  ColorValue,
-  StyleSheet,
 } from "react-native";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Modal from "react-native-modal";
 import React, { useEffect, useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -18,7 +17,7 @@ import Feather from "@expo/vector-icons/Feather";
 import { CustomHeader } from "@/component/CustomHeader";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Entypo from "@expo/vector-icons/Entypo";
-import CustomTitle from "@/component/CustomTitle";
+
 const DetailsPage: React.FC = () => {
   const router = useRouter();
   const { id } = useLocalSearchParams();
@@ -37,55 +36,70 @@ const DetailsPage: React.FC = () => {
   }, [id]);
 
   const [isModalVisible, setModalVisible] = useState(false);
+  const toggleModal = () => setModalVisible(!isModalVisible);
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const [selectedTime, setSelectedTime] = useState(new Date());
+  const showDatePicker = () => setDatePickerVisibility(true);
+  const hideDatePicker = () => setDatePickerVisibility(false);
+
+  const showTimePicker = () => setTimePickerVisibility(true);
+  const hideTimePicker = () => setTimePickerVisibility(false);
+  console.log(selectedDate, selectedTime);
+  const handleDateConfirm = (date: Date) => {
+    setSelectedDate(date);
+    hideDatePicker();
   };
-
-  console.log(detailsData);
+  const handleTimeConfirm = (time: Date) => {
+    setSelectedTime(time);
+    hideTimePicker();
+  };
   if (!detailsData) {
     return <Text>Loading...</Text>;
-  } else
+  } else {
     return (
       <SafeAreaView className="bg-[#f9f9f9]">
         <ScrollView>
-          {/**top image */}
+          {/** Top Image */}
           <View className="relative">
             <Image
               source={detailsData.image}
-              className="w-[100%] h-96"
+              className="w-full h-96"
               resizeMode="cover"
             />
             <View className="absolute px-6 py-10">
               <TouchableOpacity className="mb-14" onPress={() => router.back()}>
                 <AntDesign name="arrowleft" size={30} />
               </TouchableOpacity>
-
-              {/**rating */}
-              <View className="bg-[#FB9450] p-2 z-10 flex-row items-center gap-1 w-[23%] rounded-xl">
+              {/** Rating */}
+              <View className="bg-[#FB9450] p-2 z-10 flex-row items-center gap-1 w-1/4 rounded-xl">
                 <AntDesign name="star" size={12} color="white" />
                 <Text className="text-white">{detailsData.rating}</Text>
               </View>
-              {/**title */}
-              <View className="w-[100%] mt-6">
+              {/** Title */}
+              <View className="w-full mt-6">
                 <Text className="font-bold text-5xl text-white">
                   AC Regular Service
                 </Text>
               </View>
             </View>
           </View>
-          {/**type of property */}
-          <View className="bg-white -mt-10 w-[90%] mx-auto p-4 rounded-xl">
+
+          {/** Type of Property */}
+          <View className="bg-white -mt-10 w-11/12 mx-auto p-4 rounded-xl">
             <CustomHeader title="Type of Property" />
-            <View className="flex-row justify-around  mt-6">
+            <View className="flex-row justify-around mt-6">
               <View>
                 <TouchableOpacity
                   onPress={() => setSelectHome(!selectHome)}
-                  className={
+                  className={`p-5 border ${
                     selectHome
-                      ? "p-5 border border-[#6759ff] bg-[#6759ff] rounded-2xl"
-                      : "p-5 border border-[#D1D3D4] rounded-2xl"
-                  }
+                      ? "border-[#6759ff] bg-[#6759ff]"
+                      : "border-[#D1D3D4]"
+                  } rounded-2xl`}
                 >
                   <Feather
                     name="home"
@@ -98,11 +112,11 @@ const DetailsPage: React.FC = () => {
               <View>
                 <TouchableOpacity
                   onPress={() => setSelectOffice(!selectOffice)}
-                  className={
+                  className={`p-5 border ${
                     selectOffice
-                      ? "p-5 border border-[#6759ff] bg-[#6759ff] rounded-2xl"
-                      : "p-5 border border-[#D1D3D4] rounded-2xl"
-                  }
+                      ? "border-[#6759ff] bg-[#6759ff]"
+                      : "border-[#D1D3D4]"
+                  } rounded-2xl`}
                 >
                   <FontAwesome5
                     name="building"
@@ -115,11 +129,11 @@ const DetailsPage: React.FC = () => {
               <View>
                 <TouchableOpacity
                   onPress={() => setSelectVila(!selectVila)}
-                  className={
+                  className={`p-5 border ${
                     selectVila
-                      ? "p-5 border border-[#6759ff] bg-[#6759ff] rounded-2xl"
-                      : "p-5 border border-[#D1D3D4] rounded-2xl"
-                  }
+                      ? "border-[#6759ff] bg-[#6759ff]"
+                      : "border-[#D1D3D4]"
+                  } rounded-2xl`}
                 >
                   <Entypo
                     name="shop"
@@ -131,9 +145,9 @@ const DetailsPage: React.FC = () => {
               </View>
             </View>
           </View>
-          {/**number of units and bedrooms */}
 
-          <View className="bg-white mt-5 w-[90%] mx-auto p-4 rounded-xl">
+          {/** Number of Units and Bedrooms */}
+          <View className="bg-white mt-5 w-11/12 mx-auto p-4 rounded-xl">
             <View className="flex-row justify-between">
               <Text className="text-lg">Number of Units</Text>
               <View className="flex-row items-center gap-3">
@@ -187,8 +201,9 @@ const DetailsPage: React.FC = () => {
               </View>
             </View>
           </View>
-          {/* Sticky Footer */}
-          <View style={styles.footer} className="flex-col gap-4 justify-center">
+
+          {/** Sticky Footer */}
+          <View className="px-5 py-4 bg-white border-t border-gray-300">
             <View className="flex-row justify-between">
               <View className="flex-row gap-2">
                 <Text className="text-gray-400">Total:</Text>
@@ -204,91 +219,127 @@ const DetailsPage: React.FC = () => {
                 </TouchableOpacity>
               </View>
             </View>
-            <View
-              className="
-            flex-row gap-4 justify-center"
-            >
-              <TouchableOpacity
-                className="bg-[#fcfcfc] border  border-gray-300"
-                style={styles.button}
-              >
+            <View className="flex-row gap-4 justify-center mt-6">
+              <TouchableOpacity className="bg-[#fcfcfc] border border-gray-300 p-4 rounded-xl px-11">
                 <Text className="text-black">Save Draft</Text>
               </TouchableOpacity>
-              <TouchableOpacity className="bg-[#6759ff]" style={styles.button}>
+              <TouchableOpacity className="bg-[#6759ff] p-4 px-11 rounded-xl">
                 <Text className="text-white">Book Now</Text>
               </TouchableOpacity>
             </View>
           </View>
-          {/* Overlay Modal */}
+
+          {/** Overlay Modal */}
           <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
-            <View className="bg-white rounded-xl p-5">
-              {/**top part */}
-              <View className="flex-row justify-between ">
-                <View className="w-[80%]">
-                  <CustomHeader title="Select your Date & Time?" />
+            <View className="h-full justify-end">
+              <View className="bg-white flex-col rounded-xl p-5">
+                <View className="flex-row justify-between">
+                  <View className="w-[80%]">
+                    <CustomHeader title="Select your Date & Time?" />
+                  </View>
+
+                  <TouchableOpacity
+                    onPress={toggleModal}
+                    className="p-2 border border-gray-200 bg-gray-200 rounded-full"
+                  >
+                    <AntDesign name="close" />
+                  </TouchableOpacity>
                 </View>
 
-                <TouchableOpacity
-                  onPress={toggleModal}
-                  className="p-2 border border-gray-200 bg-gray-200 rounded-full"
-                >
-                  <AntDesign name="close" />
-                </TouchableOpacity>
+                <View className="items-start mt-9">
+                  <TouchableOpacity
+                    onPress={showDatePicker}
+                    className="bg-[#ffbc99] p-4 rounded-2xl"
+                  >
+                    <View className="flex-row gap-5 items-center">
+                      <View>
+                        <AntDesign name="carryout" size={30} color="black" />
+                      </View>
+                      <View>
+                        <Text className="text-gray-500">DATE</Text>
+                        {selectedDate ? (
+                          <Text className="mt-2 text-lg">
+                            Selected Date: {selectedDate.toDateString()}
+                          </Text>
+                        ) : (
+                          <Text className="mt-2 text-lg">Select your Date</Text>
+                        )}
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+
+                  {/* <Text className="mt-5 text-lg">
+                  Selected Date: {selectedDate.toDateString()}
+                </Text> */}
+
+                  <DateTimePickerModal
+                    isVisible={isDatePickerVisible}
+                    mode="date"
+                    onConfirm={handleDateConfirm}
+                    onCancel={hideDatePicker}
+                  />
+                </View>
+                {/** Time Picker */}
+                <View className="mt-5">
+                  <TouchableOpacity
+                    onPress={showTimePicker}
+                    className="bg-[#b5e4ca] p-4 rounded-2xl "
+                  >
+                    <View className="flex-row gap-5 items-center">
+                      <View>
+                        <AntDesign name="clockcircle" size={30} color="black" />
+                      </View>
+                      <View>
+                        <Text className="text-gray-500">TIME</Text>
+                        {selectedDate ? (
+                          <Text className="mt-2 text-lg">
+                            Selected Time: {selectedTime.toTimeString()}
+                          </Text>
+                        ) : (
+                          <Text className="mt-2 text-lg">Select your Time</Text>
+                        )}
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                  <DateTimePickerModal
+                    isVisible={isTimePickerVisible}
+                    mode="time"
+                    onConfirm={handleTimeConfirm}
+                    onCancel={hideTimePicker}
+                  />
+                </View>
               </View>
-              {/**middle part */}
+              <View className="px-5 py-4 bg-white border-t  border-gray-300">
+                <View className="flex-row justify-between">
+                  <View className="flex-row gap-2">
+                    <Text className="text-gray-400">Total:</Text>
+                    <Text className="font-bold">USD {detailsData.money}</Text>
+                  </View>
+                  <View>
+                    <TouchableOpacity
+                      onPress={toggleModal}
+                      className="flex-row items-center gap-1"
+                    >
+                      <Text className="text-orange-500">View Details</Text>
+                      <AntDesign name="down" color={"#f97316"} />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <View className="flex-row gap-4 justify-center mt-6">
+                  <TouchableOpacity className="bg-[#fcfcfc] border border-gray-300 p-4 rounded-xl px-11">
+                    <Text className="text-black">Save Draft</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity className="bg-[#6759ff] p-4 px-11 rounded-xl">
+                    <Text className="text-white">Book Now</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
           </Modal>
         </ScrollView>
       </SafeAreaView>
     );
+  }
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  content: {
-    flexGrow: 1,
-    padding: 20,
-  },
-  text: {
-    fontSize: 18,
-    marginBottom: 10,
-  },
-  footer: {
-    padding: 20,
-    backgroundColor: "#ffffff",
-    borderTopWidth: 1,
-    borderTopColor: "#ddd",
-  },
-  button: {
-    padding: 15,
-    borderRadius: 10,
-    alignItems: "center",
-    paddingHorizontal: 50,
-    marginTop: 10,
-  },
-
-  modalContent: {
-    backgroundColor: "#fff",
-    padding: 20,
-    borderRadius: 10,
-  },
-  modalText: {
-    fontSize: 16,
-    marginBottom: 10,
-  },
-  closeButton: {
-    marginTop: 20,
-    backgroundColor: "#007bff",
-    padding: 10,
-    borderRadius: 5,
-    alignItems: "center",
-  },
-  closeButtonText: {
-    color: "#fff",
-    fontSize: 16,
-  },
-});
 
 export default DetailsPage;
