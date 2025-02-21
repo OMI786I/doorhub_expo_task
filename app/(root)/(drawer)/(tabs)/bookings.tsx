@@ -3,6 +3,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "@/app/Context/ThemeContext";
 import images from "@/constants/images";
 import { useSelector } from "react-redux";
+import { RootState } from "@/store";
+interface Booking {
+  type: string;
+  unitNumber: number;
+  bedroomsNumber: number;
+  description?: string;
+  time: Date | null;
+}
+
 const bookings = () => {
   const [defaultColor, setDefaultColor] = useState("#f9f9f9");
   const [defaultTextColor, setDefaultTextColor] = useState("#000000"); // Default text color
@@ -10,7 +19,9 @@ const bookings = () => {
   const [upcomingBtn, setUpcomingBtn] = useState<boolean>(false);
   const [historyBtn, setHistoryBtn] = useState<boolean>(false);
   const [draftBtn, setDraftBtn] = useState<boolean>(false);
-  const services = useSelector((state) => state.services.services);
+  const services: Booking[] = useSelector(
+    (state: RootState) => state.services.services
+  );
   console.log(services);
   useEffect(() => {
     if (isDark) {

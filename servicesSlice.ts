@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface Services {
+  id: 1;
   type: string;
   unitNumber: number;
   bedroomsNumber: number;
   description?: string;
-  time: Date | null;
+  time: Date | string | null;
 }
 interface ServicesState {
   services: Services[];
@@ -14,11 +15,12 @@ interface ServicesState {
 const initialState: ServicesState = {
   services: [
     {
+      id: 1,
       type: "Vila",
       unitNumber: 3,
       bedroomsNumber: 3,
       description: "Testing",
-      time: null,
+      time: "",
     },
   ],
 };
@@ -28,7 +30,13 @@ const serviceSlice = createSlice({
   initialState,
   reducers: {
     addServices: (state, action) => {
-      state.services.push(action.payload);
+      const newService = {
+        ...action.payload,
+        time: action.payload.time
+          ? new Date(action.payload.time).toISOString()
+          : null,
+      };
+      state.services.push(newService);
     },
   },
 });

@@ -18,13 +18,15 @@ import Feather from "@expo/vector-icons/Feather";
 import { CustomHeader } from "@/component/CustomHeader";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Entypo from "@expo/vector-icons/Entypo";
-
+import { addServices } from "@/servicesSlice";
+import { useDispatch } from "react-redux";
 interface Booking {
+  id: number;
   type: string;
   unitNumber: number;
   bedroomsNumber: number;
   description?: string;
-  time: Date | null;
+  time: Date | string;
 }
 
 const DetailsPage: React.FC = () => {
@@ -60,7 +62,7 @@ const DetailsPage: React.FC = () => {
 
   const showTimePicker = () => setTimePickerVisibility(true);
   const hideTimePicker = () => setTimePickerVisibility(false);
-
+  const dispatch = useDispatch();
   const handleDateConfirm = (date: Date) => {
     setSelectedDate(date);
     hideDatePicker();
@@ -112,14 +114,16 @@ const DetailsPage: React.FC = () => {
     }
 
     const newBooking: Booking = {
+      id: Number(id),
       type: selectedType,
       unitNumber: numberUnits,
       bedroomsNumber: bedRooms,
-      time: selectedDate,
+      time: selectedDate.toISOString(),
       description: description,
     };
 
     setBookingData([newBooking]);
+    dispatch(addServices(newBooking));
   };
 
   useEffect(() => {
