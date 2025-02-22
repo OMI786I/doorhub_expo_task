@@ -68,20 +68,6 @@ const applianceRepair = () => {
                   color={activeFilterGrid ? "#6759ff" : "#9A9FA5"}
                 />
               </TouchableOpacity>
-              {/* <TouchableOpacity
-                className={
-                  activeFilterGrid
-                    ? "bg-[#ffffff] p-4 rounded-xl shadow-lg shadow-[#6759ff]"
-                    : "bg-[#f7f7f7] p-4 rounded-xl"
-                }
-                onPress={() => setActiveFilterGrid(!activeFilterGrid)}
-              >
-                <AntDesign
-                  name="table"
-                  size={24}
-                  color={activeFilterGrid ? "#6759ff" : "#9A9FA5"}
-                />
-              </TouchableOpacity> */}
             </View>
           </View>
 
