@@ -3,21 +3,19 @@ import {
   Text,
   SafeAreaView,
   TouchableOpacity,
-  ImageSourcePropType,
   FlatList,
   Image,
 } from "react-native";
 import React, { useState } from "react";
 import CustomTitle from "@/component/CustomTitle";
-import { useRouter } from "expo-router";
+import { router } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
 import Search from "@/component/Search";
 import { data } from "@/constants/data";
+import Fontisto from "@expo/vector-icons/Fontisto";
 const applianceRepair = () => {
   const [activeFilterGrid, setActiveFilterGrid] = useState<boolean>(false);
   const [activeFilterList, setActiveFilterList] = useState<boolean>(true);
-
-  const router = useRouter();
 
   console.log(activeFilterGrid, activeFilterList);
 
@@ -64,12 +62,26 @@ const applianceRepair = () => {
                 }
                 onPress={() => setActiveFilterGrid(!activeFilterGrid)}
               >
+                <Fontisto
+                  name="nav-icon-grid"
+                  size={24}
+                  color={activeFilterGrid ? "#6759ff" : "#9A9FA5"}
+                />
+              </TouchableOpacity>
+              {/* <TouchableOpacity
+                className={
+                  activeFilterGrid
+                    ? "bg-[#ffffff] p-4 rounded-xl shadow-lg shadow-[#6759ff]"
+                    : "bg-[#f7f7f7] p-4 rounded-xl"
+                }
+                onPress={() => setActiveFilterGrid(!activeFilterGrid)}
+              >
                 <AntDesign
                   name="table"
                   size={24}
                   color={activeFilterGrid ? "#6759ff" : "#9A9FA5"}
                 />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
           </View>
 
